@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://BaseTile.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/BlackTile.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/WhiteTile.png" type="Texture" id=3]
+
+[node name="Tile" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="WhiteSprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+
+[node name="BlackSprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
