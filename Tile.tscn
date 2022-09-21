@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://BaseTile.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/BlackTile.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/WhiteTile.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/KeySprite.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/WallSprite.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/ChasmSprite.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/FloorSprite.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/IceSprite.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/DoorSprite.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/SpikesSprite.png" type="Texture" id=8]
 
 [node name="Tile" type="Node2D"]
 script = ExtResource( 1 )
@@ -10,10 +15,30 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="WhiteSprite" type="Sprite" parent="."]
+[node name="ChasmSprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+
+[node name="FloorSprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+
+[node name="WallSprite" type="Sprite" parent="."]
 scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 
-[node name="BlackSprite" type="Sprite" parent="."]
+[node name="IceSprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
+
+[node name="SpikesSprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 8 )
+
+[node name="DoorSprite" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
+[node name="KeySprite" type="Sprite" parent="."]
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
