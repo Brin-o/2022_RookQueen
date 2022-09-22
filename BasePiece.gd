@@ -4,7 +4,7 @@ class_name BasePiece
 
 signal finished_movement
 
-var current_tile = Vector2(2,2)
+var current_tile : Vector2
 var boardScene : Board
 enum Type{Player, Enemy}
 var type = Type.Player

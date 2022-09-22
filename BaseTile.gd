@@ -13,6 +13,12 @@ Spikes: S
 Door: D
 Key: K
 
+
+Pawn: P p
+Bishop: B b
+Horse: H h
+Queen: Q q
+Rook: R r
 Enemies will probably be numbered, assuming that they start on a Floor tile
 """
 

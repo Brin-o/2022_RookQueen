@@ -7,6 +7,15 @@ export var offset = 50
 export var dimension = 1
 export (PackedScene) var tile_scene
 
+export(PackedScene) var pawn
+export(PackedScene) var bishop
+export(PackedScene) var horse
+export(PackedScene) var queen
+export(PackedScene) var rook
+
+
+var enemies_type = ["P", "p", "B", "b", "H", "h", "Q", "q", "R", "r"]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	generate_board()
@@ -37,8 +46,12 @@ func generate_board():
 			var new_tile = tile_scene.instance()
 			var tile_size = new_tile.get_node("FloorSprite").texture.get_size().x * new_tile.get_node("FloorSprite").scale.x
 			new_tile.position = Vector2(column * tile_size + 50,row * tile_size + 50)
-			new_tile.type = tile
 			new_tile.pos = Vector2(row, column)
+			if tile in enemies_type:
+				new_tile.type = "F"
+				spawn_piece(tile, new_tile.pos)
+			else:
+				new_tile.type = tile
 			add_child(new_tile)
 			board[row].append(new_tile)
 			column += 1
@@ -74,3 +87,25 @@ func is_steppable(new_pos: Vector2):
 		return false
 
 	return board[new_pos.x][new_pos.y].is_walkable()
+
+func spawn_piece(tile : String, pos : Vector2):
+	var piece = null
+	
+	match(tile):
+		"P","p":
+			piece = pawn.instance()
+		"B","b":
+			piece = bishop.instance()
+		"H","h":
+			piece = horse.instance()
+		"Q","q":
+			piece = queen.instance()
+		"R","r":
+			piece = rook.instance()
+		_:
+			printerr("Wrong enemy character")
+
+	piece.current_tile = pos
+	#piece.type = BasePiece.Type.Enemy if tile == tile.to_lower() else BasePiece.Type.Player 
+	get_parent().call_deferred("add_child", piece)
+
