@@ -38,18 +38,24 @@ func generate_board():
 			var tile_size = new_tile.get_node("FloorSprite").texture.get_size().x * new_tile.get_node("FloorSprite").scale.x
 			new_tile.position = Vector2(column * tile_size + 50,row * tile_size + 50)
 			new_tile.type = tile
+			new_tile.pos = Vector2(row, column)
 			add_child(new_tile)
 			board[row].append(new_tile)
 			column += 1
 		row += 1
 		column = 0
 
+func get_tile(pos):
+	assert(is_inbounds(pos), "You were trying to access an out of bounds position")
+	return board[pos.x][pos.y]
+
+func set_tile_piece(var tile_pos : Vector2, piece):
+	get_tile(tile_pos).contains = piece
+
 func board_position(pos):
-	assert(is_position_inbounds(pos), "You were trying to access an out of bounds position")
-	return board[pos.x][pos.y].position
+	return get_tile(pos).position
 
-
-func is_position_inbounds(new_pos: Vector2):
+func is_inbounds(new_pos: Vector2):
 	if new_pos.x < 0 or new_pos.y < 0:
 		return false
 
@@ -62,7 +68,7 @@ func is_position_inbounds(new_pos: Vector2):
 	return true
 
 func is_steppable(new_pos: Vector2):
-	var inbounds = is_position_inbounds(new_pos)
+	var inbounds = is_inbounds(new_pos)
 
 	if not inbounds:
 		return false

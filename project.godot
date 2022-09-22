@@ -42,6 +42,10 @@ config/name="2022 Rook Queen"
 run/main_scene="res://MainScene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameManager="*res://GameManager.gd"
+
 [display]
 
 window/size/width=256
