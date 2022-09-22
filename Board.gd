@@ -74,4 +74,3 @@ func is_steppable(new_pos: Vector2):
 		return false
 
 	return board[new_pos.x][new_pos.y].is_walkable()
-
