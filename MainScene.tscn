@@ -5,8 +5,9 @@
 
 [node name="MainScene" type="Node2D"]
 
-[node name="Pawn" parent="." instance=ExtResource( 2 )]
-position = Vector2( 17, 25 )
-
 [node name="Board" parent="." instance=ExtResource( 1 )]
 dimension = 9
+
+[node name="Pawn" parent="." instance=ExtResource( 2 )]
+position = Vector2( 17, 25 )
+z_index = 1

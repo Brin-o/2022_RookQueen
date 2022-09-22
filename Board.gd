@@ -1,9 +1,7 @@
 extends Node
 
-# Declare member variables here. Examples:
 var board
 export var offset = 50
-
 export var dimension = 1
 export (PackedScene) var tile_scene
 
@@ -14,9 +12,8 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+func _process(delta):
+	pass
 
 func generate_board():
 
