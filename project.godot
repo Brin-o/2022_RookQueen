@@ -38,6 +38,11 @@ _global_script_classes=[ {
 "class": "Pawn",
 "language": "GDScript",
 "path": "res://Pawn.gd"
+}, {
+"base": "BasePiece",
+"class": "Queen",
+"language": "GDScript",
+"path": "res://Queen.gd"
 } ]
 _global_script_class_icons={
 "BasePiece": "",
@@ -45,7 +50,8 @@ _global_script_class_icons={
 "Board": "",
 "ColorManager": "",
 "Horse": "",
-"Pawn": ""
+"Pawn": "",
+"Queen": ""
 }
 
 [application]

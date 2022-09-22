@@ -2,7 +2,6 @@ extends BasePiece
 
 class_name Horse
 
-
 func can_move_to():
 	var tiles : Array = []
 
