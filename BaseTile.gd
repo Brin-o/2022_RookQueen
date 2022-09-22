@@ -34,3 +34,6 @@ func _set_sprites():
 	$SpikesSprite.visible = type == "S"
 	$DoorSprite.visible = type == "D"
 	$KeySprite.visible = type == "K"
+
+func is_walkable():
+	return type == "F" or type == "I" or type == "S" or type == "D" or type == "K" 

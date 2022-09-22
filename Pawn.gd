@@ -1,19 +1,8 @@
-extends Node2D
+extends BasePiece
 
+class_name Pawn
 
-# Declare member variables here. Examples:
-var pressed = false
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_KinematicBody2D_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		pressed = not pressed
+func can_move_to():
+    var fwd = Vector2(current_tile.x, current_tile.y-1)
+    
+    print(boardScene.is_steppable(fwd))
