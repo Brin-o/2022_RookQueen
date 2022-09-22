@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/Horse.png" type="Texture" id=1]
+[ext_resource path="res://Horse.gd" type="Script" id=2]
+
+[node name="Horse" type="Node2D"]
+z_index = 1
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+
+[connection signal="finished_movement" from="." to="." method="_on_BasePiece_finished_movement"]
