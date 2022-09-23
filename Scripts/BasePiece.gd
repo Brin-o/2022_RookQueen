@@ -29,7 +29,8 @@ func move_to(var pos : Vector2):
 	current_tile = pos
 	position = boardScene.board_position(pos)
 	boardScene.set_tile_piece(current_tile, self)
-	GameManager.next_turn()
+	if type == "Player":
+		GameManager.next_turn()
 
 func _on_BasePiece_finished_movement():
 	pass # Replace with function body.
