@@ -12,17 +12,17 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "BasePiece",
 "language": "GDScript",
-"path": "res://BasePiece.gd"
+"path": "res://Scripts/BasePiece.gd"
 }, {
 "base": "BasePiece",
 "class": "Bishop",
 "language": "GDScript",
-"path": "res://Bishop.gd"
+"path": "res://Scripts/Bishop.gd"
 }, {
 "base": "Node",
 "class": "Board",
 "language": "GDScript",
-"path": "res://Board.gd"
+"path": "res://Scripts/Board.gd"
 }, {
 "base": "ColorRect",
 "class": "ColorManager",
@@ -32,22 +32,22 @@ _global_script_classes=[ {
 "base": "BasePiece",
 "class": "Horse",
 "language": "GDScript",
-"path": "res://Horse.gd"
+"path": "res://Scripts/Horse.gd"
 }, {
 "base": "BasePiece",
 "class": "Pawn",
 "language": "GDScript",
-"path": "res://Pawn.gd"
+"path": "res://Scripts/Pawn.gd"
 }, {
 "base": "BasePiece",
 "class": "Queen",
 "language": "GDScript",
-"path": "res://Queen.gd"
+"path": "res://Scripts/Queen.gd"
 }, {
 "base": "BasePiece",
 "class": "Rook",
 "language": "GDScript",
-"path": "res://Rook.gd"
+"path": "res://Scripts/Rook.gd"
 } ]
 _global_script_class_icons={
 "BasePiece": "",
@@ -68,7 +68,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameManager="*res://GameManager.gd"
+GameManager="*res://Scripts/GameManager.gd"
 
 [display]
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Sprites/Horse.png" type="Texture" id=1]
-[ext_resource path="res://Bishop.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Rook.gd" type="Script" id=2]
 
-[node name="Bishop" type="Node2D"]
+[node name="Rook" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
 
