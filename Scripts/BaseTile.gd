@@ -3,6 +3,7 @@ extends Node2D
 var contains
 var pos : Vector2
 var type
+var color
 
 """
 Chasm: C
@@ -32,6 +33,13 @@ func _process(delta):
 
 func _set_sprites():
 	#Show the correct sprite and hide all of the rest
+
+	if color == "White":
+		modulate = Color(1,1,1)
+	elif color == "Black":
+		modulate = Color(0,0,0)
+	else:
+		printerr("Wrong color in tile")
 
 	$ChasmSprite.visible = type == "C"
 	$FloorSprite.visible = type == "F"
