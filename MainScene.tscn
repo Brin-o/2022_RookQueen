@@ -46,7 +46,6 @@ palettes = {
 [node name="Tween" type="Tween" parent="ShaderL1/ColorManager"]
 
 [node name="Board" parent="." instance=ExtResource( 1 )]
-offset = null
 dimension = 9
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -15,6 +15,8 @@ func _ready():
 	boardScene = get_parent().get_node("Board")
 	position = boardScene.board_position(current_tile)
 	boardScene.set_tile_piece(current_tile, self)
+	if type=="Enemy":
+		modulate = GameManager.recolor.colEnemy;
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

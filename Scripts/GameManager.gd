@@ -3,6 +3,7 @@ extends Node2D
 var selected_piece : BasePiece
 var turn = "Player"
 var board : Board
+var recolor : ColorManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
