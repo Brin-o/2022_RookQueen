@@ -1,13 +1,17 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Sprites/Pieces/horse.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Pieces/queen.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Horse.gd" type="Script" id=2]
 
 [node name="Horse" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="SpritePivot" type="Node2D" parent="."]
+position = Vector2( 0, 8.5 )
+
+[node name="Sprite" type="Sprite" parent="SpritePivot"]
+position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 
 [connection signal="finished_movement" from="." to="." method="_on_BasePiece_finished_movement"]
