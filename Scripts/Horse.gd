@@ -44,7 +44,12 @@ func move_to(var pos : Vector2):
 		position = boardScene.board_position(pos)
 		var killed = boardScene.get_tile(pos).contains.take_damage(damage)
 		if killed:
-			#you move again
+			#Change position and be able to move again
+			print("You killed as a horse, you get another turn!")
+			boardScene.set_tile_piece(current_tile, null)
+			current_tile = pos
+			position = boardScene.board_position(pos)
+			boardScene.set_tile_piece(current_tile, self)
 			pass
 		else:
 			position = boardScene.board_position(current_tile)
