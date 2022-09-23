@@ -1,6 +1,8 @@
 extends Node2D
 
 var selected_piece : BasePiece
+var turn = "Player"
+var board : Board
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,3 +14,14 @@ func _process(delta):
 
 func set_selected_piece(piece):
 	selected_piece = piece
+
+func next_turn():
+	if turn == "Player":
+		turn = "Enemy"
+	else:
+		turn = "Player"
+
+func enemy_turn():
+	# Very basic turn: one of the enemies randomly moves, the rest does nothing
+	
+	pass

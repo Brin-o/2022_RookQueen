@@ -15,11 +15,13 @@ export(PackedScene) var rook
 
 
 var enemies_type = ["P", "p", "B", "b", "H", "h", "Q", "q", "R", "r"]
+var enemies : Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	generate_board()
 	read_file()
+	GameManager.board = self
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -107,6 +109,10 @@ func spawn_piece(tile : String, pos : Vector2):
 			printerr("Wrong enemy character")
 
 	piece.current_tile = pos
-	#piece.type = BasePiece.Type.Enemy if tile == tile.to_lower() else BasePiece.Type.Player 
+	piece.type = "Player" if tile == tile.to_lower() else "Enemy"
+	if piece.type == "Enemy":
+		enemies.append(piece)
 	get_parent().call_deferred("add_child", piece)
 
+func remove_from_enemies(enemy):
+	enemies.erase(enemy)

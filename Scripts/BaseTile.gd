@@ -53,12 +53,19 @@ func is_walkable():
 	return type == "F" or type == "I" or type == "S" or type == "D" or type == "K" 
 
 func contains_enemy():
-	return contains != null and contains.type == contains.Type.Enemy
+	return contains != null and contains.type == "Enemy"
+
+func contains_opponent(var check_type):
+	var opponent = "Player" if check_type == "Enemy" else "Enemy"
+	return contains != null and contains.type == opponent
 
 func _on_KinematicBody2D_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
+	if GameManager.turn == "Enemy":
+		return
+
 	if event is InputEventMouseButton and event.pressed:
 
-		if contains != null:
+		if contains != null and contains.type != "Enemy":
 			GameManager.selected_piece = contains		
 		elif GameManager.selected_piece != null:
 			if pos in GameManager.selected_piece.can_move_to():
