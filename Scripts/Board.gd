@@ -46,7 +46,7 @@ func generate_board():
 		board.append([])
 		for tile in line:
 			var new_tile = tile_scene.instance()
-			var tile_size = new_tile.get_node("FloorSprite").texture.get_size().x * new_tile.get_node("FloorSprite").scale.x
+			var tile_size = new_tile.get_node("FloorSprite").texture.get_size().x * new_tile.get_node("FloorSprite").scale.x + 4
 			new_tile.position = Vector2(column * tile_size + 50,row * tile_size + 50)
 			new_tile.pos = Vector2(row, column)
 			new_tile.color = "White" if(row%2==0 and column%2!=0 or row%2!=0 and column%2==0) else "Black"

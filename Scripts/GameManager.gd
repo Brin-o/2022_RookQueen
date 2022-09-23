@@ -16,7 +16,6 @@ func set_selected_piece(piece):
 	selected_piece = piece
 
 func next_turn():
-	print("In next turn")
 	if turn == "Player":
 		turn = "Enemy"
 		enemy_turn()
