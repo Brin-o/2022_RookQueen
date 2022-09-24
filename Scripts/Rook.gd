@@ -29,7 +29,9 @@ func move_to(var pos : Vector2):
 			.move_to(pos)
 		else:
 			#wait for a bit
-			enemy.push((pos - current_tile).normalized())
-			.move_to(pos)
+			var can_move_to_enemy_place = enemy.push(self, (pos - current_tile).normalized())
+			if can_move_to_enemy_place:
+				print("Moving to")
+				.move_to(pos)
 	else:
 		.move_to(pos)

@@ -52,26 +52,31 @@ func do_random_move():
 	else:
 		move_to(possible_moves[randi()%possible_moves.size()])
 
-func push(direction : Vector2):
+func push(from : BasePiece, direction : Vector2):
 	var pushed_to = current_tile + direction
 	
 	if not boardScene.is_inbounds(pushed_to):
 		die()
+		return true
 	
 	elif boardScene.get_tile(pushed_to).type == "C":
 		die()
+		return true
 
 	elif boardScene.get_tile(pushed_to).type == "W":
-		pass
-		#push rook
+		from.push(self, -direction)
+		return false
 	
 	elif boardScene.get_tile(pushed_to).contains_enemy():
-		boardScene.get_tile(pushed_to).contains.push(direction)
-		move_no_turn(pushed_to)
+		var can_go = boardScene.get_tile(pushed_to).contains.push(self, direction)
+		if can_go:
+			move_no_turn(pushed_to)
+		return true
 		#apply hit damage?
 
 	else:
 		move_no_turn(pushed_to)
+		return true
 
 func move_no_turn(var pos : Vector2):
 	boardScene.set_tile_piece(current_tile, null)
