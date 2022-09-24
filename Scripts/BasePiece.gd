@@ -5,6 +5,7 @@ class_name BasePiece
 signal finished_internal_movement
 signal finished_movement
 signal finished_push
+signal finished_internal_push
 
 var current_tile : Vector2
 var boardScene : Board
@@ -18,6 +19,7 @@ export var move_timer : float = 0.5
 var moving : bool = false
 var attacking : bool = false
 var being_pushed : bool = false
+var being_pushed_internal : bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -66,7 +68,7 @@ func do_random_move():
 
 func push(from : BasePiece, direction : Vector2):
 	var pushed_to = current_tile + direction
-	#being_pushed = true
+	being_pushed = true
 	
 	if not boardScene.is_inbounds(pushed_to):
 		die()
@@ -77,11 +79,11 @@ func push(from : BasePiece, direction : Vector2):
 		return true
 
 	elif boardScene.get_tile(pushed_to).type == "W":
+		being_pushed_internal = true
 		anim_start_movement(boardScene.board_position(current_tile), boardScene.board_position(pushed_to))
-		yield(self, "finished_internal_movement")
+		yield(self, "finished_internal_push")
 		anim_start_movement(boardScene.board_position(pushed_to), boardScene.board_position(current_tile))
-		yield(self, "finished_internal_movement")
-		#yield(self, "finished_push")
+		yield(self, "finished_internal_push")
 		from.push(self, -direction)
 		return false
 	
@@ -156,13 +158,14 @@ func anim_movement():
 
 	if not moving and _previous_moving:
 
-		if being_pushed:
+		if being_pushed and not being_pushed_internal:
 			emit_signal("finished_push")
-			print("emitting push")
-		elif not attacking:
-			emit_signal("finished_movement")
-		else:
+		elif being_pushed and being_pushed_internal:
+			emit_signal("finished_internal_push")
+		elif attacking:
 			emit_signal("finished_internal_movement")
+		else:
+			emit_signal("finished_movement")
 
 	position.x = _x
 	position.y = _y
