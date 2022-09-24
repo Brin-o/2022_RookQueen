@@ -26,6 +26,9 @@ Enemies will probably be numbered, assuming that they start on a Floor tile
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	_set_sprites()
+	$BorderCorners.visible = is_walkable()
+	call_deferred("corner_border_generation")
+	#corner_border_generation()
 
 
 func _process(delta):
@@ -73,3 +76,38 @@ func _on_KinematicBody2D_input_event(_viewport:Node, event:InputEvent, _shape_id
 				GameManager.show_tiles(false)
 				GameManager.selected_piece.move_to(pos)
 			GameManager.selected_piece = null
+
+
+func corner_border_generation():
+
+	# Check if its on the edge
+	if pos.y == GameManager.board.board.size() -1:
+		$EdgeBorderCorners/TopRight.visible = true
+		$EdgeBorderCorners/BottomRight.visible = true
+	if pos.y == 0:
+		$EdgeBorderCorners/TopLeft.visible = true
+		$EdgeBorderCorners/BottomLeft.visible = true
+	if pos.x == GameManager.board.board.size() -1:
+		$EdgeBorderCorners/BottomLeft.visible = true
+		$EdgeBorderCorners/BottomRight.visible = true
+	if pos.x == 0:
+		$EdgeBorderCorners/TopLeft.visible = true
+		$EdgeBorderCorners/TopRight.visible = true
+
+
+	#topleft
+	# if not GameManager.board.is_inbounds(Vector2(pos.x-1, pos.y-1)):
+	# 	$EdgeBorderCorners/TopLeft.visible = true
+	# #topright
+	# if not GameManager.board.is_inbounds(Vector2(pos.x+1, pos.y-1)):
+	# 	print("top right of ", pos, " is nothing")
+	# 	$EdgeBorderCorners/TopRight.visible = true
+
+	# # var target = Vector2(pos.x-1, pos.y+1)
+	# # if not GameManager.board.is_inbounds(target):
+	# # 	print(pos, "has no bottom right")
+	# # 	$EdgeBorderCorners/BottomRight.visible = true	
+
+	# if not GameManager.board.is_inbounds(Vector2(pos.x+1, pos.y+1)):
+	# 	$EdgeBorderCorners/BottomRight.visible = true	
+	pass

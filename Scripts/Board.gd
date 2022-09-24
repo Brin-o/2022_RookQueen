@@ -78,12 +78,15 @@ func board_position(pos):
 
 func is_inbounds(new_pos: Vector2):
 	if new_pos.x < 0 or new_pos.y < 0:
+		print("x and y are less than 0")
 		return false
 
 	if new_pos.x >= board.size():
+		print("x is bigger than board")
 		return false
 
 	if new_pos.y >= board[new_pos.x].size():
+		print("y is bigger than board")
 		return false
 		
 	return true

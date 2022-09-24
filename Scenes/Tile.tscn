@@ -3,8 +3,8 @@
 [ext_resource path="res://Scripts/BaseTile.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/KeySprite.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/WallSprite.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/ChasmSprite.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Tiles/border.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Tiles/border_corner.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Tiles/border_edge.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/IceSprite.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/DoorSprite.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/SpikesSprite.png" type="Texture" id=8]
@@ -21,16 +21,84 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Border" type="Sprite" parent="."]
+[node name="BorderCorners" type="Node2D" parent="."]
+z_index = -2
+
+[node name="TopLeft" type="Sprite" parent="BorderCorners"]
+position = Vector2( -6, -8 )
+texture = ExtResource( 4 )
+
+[node name="TopRight" type="Sprite" parent="BorderCorners"]
+position = Vector2( 6, -8 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 4 )
+
+[node name="RightTop" type="Sprite" parent="BorderCorners"]
+position = Vector2( 8, -6 )
+rotation = 1.5708
+texture = ExtResource( 4 )
+
+[node name="RightBottom" type="Sprite" parent="BorderCorners"]
+position = Vector2( 9, 6 )
+rotation = 4.71239
+texture = ExtResource( 4 )
+
+[node name="BottomLeft" type="Sprite" parent="BorderCorners"]
+position = Vector2( -6, 9 )
+texture = ExtResource( 4 )
+
+[node name="BottomRight" type="Sprite" parent="BorderCorners"]
+position = Vector2( 6, 9 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 4 )
+
+[node name="LeftBottom" type="Sprite" parent="BorderCorners"]
+position = Vector2( -8, 6 )
+rotation = -1.5708
+texture = ExtResource( 4 )
+
+[node name="LeftTop" type="Sprite" parent="BorderCorners"]
+position = Vector2( -9, -6 )
+rotation = 1.5708
+texture = ExtResource( 4 )
+
+[node name="EdgeBorderCorners" type="Node2D" parent="."]
+z_index = -1
+
+[node name="TopLeft" type="Sprite" parent="EdgeBorderCorners"]
+visible = false
+position = Vector2( -6, -6 )
 texture = ExtResource( 5 )
+offset = Vector2( -0.5, -0.5 )
+
+[node name="TopRight" type="Sprite" parent="EdgeBorderCorners"]
+visible = false
+position = Vector2( 6, -6 )
+texture = ExtResource( 5 )
+offset = Vector2( 0.5, -0.5 )
+flip_h = true
+
+[node name="BottomLeft" type="Sprite" parent="EdgeBorderCorners"]
+visible = false
+position = Vector2( -6, 6 )
+texture = ExtResource( 5 )
+offset = Vector2( -0.5, 0.5 )
+flip_v = true
+
+[node name="BottomRight" type="Sprite" parent="EdgeBorderCorners"]
+visible = false
+position = Vector2( 6, 6 )
+texture = ExtResource( 5 )
+offset = Vector2( 0.5, 0.5 )
+flip_h = true
+flip_v = true
 
 [node name="Sprite" type="Node2D" parent="."]
 
 [node name="ChasmSprite" type="Sprite" parent="Sprite"]
-visible = false
-texture = ExtResource( 4 )
 
 [node name="FloorSprite" type="Sprite" parent="Sprite"]
+visible = false
 texture = ExtResource( 9 )
 
 [node name="WallSprite" type="Sprite" parent="Sprite"]
