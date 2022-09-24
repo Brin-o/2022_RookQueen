@@ -12,26 +12,21 @@ export var damage : int = 1
 export var move_timer : float = 0.5
 
 
-# Animation Vars
-var pivot_pos = 7
-var pivot_selected_pos = 3
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	boardScene = get_parent().get_node("Board")
 	position = boardScene.board_position(current_tile)
+	anim_start_movement(position, position)
 	boardScene.set_tile_piece(current_tile, self)
 	if type=="Enemy":
 		$SpritePivot/Sprite.self_modulate = GameManager.recolor.colEnemy;
 
 
 func _physics_process(delta):
-	var pivot = $SpritePivot.position
-	if type == "Player":
-		if GameManager.selected_piece == self or $Tween.is_active():
-			$SpritePivot.position.y = lerp(pivot.y, pivot_selected_pos, 0.3)
-		else:
-			$SpritePivot.position.y = lerp(pivot.y, pivot_pos, 0.8)
+	anim_selection()
+	anim_movement()
 
 func can_move_to():
 	assert(false, "Method not implemented!")
@@ -91,8 +86,44 @@ func push(from : BasePiece, direction : Vector2):
 func move_no_turn(var pos : Vector2):
 	boardScene.set_tile_piece(current_tile, null)
 	current_tile = pos
-	var target_position = boardScene.board_position(pos)
-	var t : Tween = $Tween
-	t.interpolate_property(self, "position", null, target_position, move_timer, Tween.TRANS_CUBIC, Tween.EASE_OUT) 
-	t.start()
+	var new_pos = boardScene.board_position(pos)
+	anim_start_movement(position, new_pos)
 	boardScene.set_tile_piece(current_tile, self)
+
+
+# ANIMATIONS
+# Animation Vars
+var movement_lerp = 0
+var movement_lerp_speed = 0.05
+
+var mov_jump_height = 12
+
+var mov_pos_old 
+var mov_pos_new 
+
+var pivot_pos = 7
+var pivot_selected_pos = 3
+
+
+func anim_selection():
+	var pivot = $SpritePivot.position
+	if type == "Player":
+		if GameManager.selected_piece == self or $Tween.is_active():
+			$SpritePivot.position.y = lerp(pivot.y, pivot_selected_pos, 0.3)
+		else:
+			$SpritePivot.position.y = lerp(pivot.y, pivot_pos, 0.8)
+
+
+func anim_start_movement(_op, _np):
+	movement_lerp = 0
+	mov_pos_old = _op
+	mov_pos_new = _np
+	pass
+
+func anim_movement():
+	movement_lerp = min(movement_lerp+movement_lerp_speed, 1)
+	var _x = lerp(mov_pos_old.x, mov_pos_new.x, movement_lerp)
+	var _y = lerp(mov_pos_old.y, mov_pos_new.y, movement_lerp) + Util.lenghtdir_y(mov_jump_height,180*movement_lerp)
+	position.x = _x
+	position.y = _y
+	pass

@@ -137,6 +137,22 @@ func vector2deg(_vec: Vector2) -> float:
 func vector2rotated(_vec: Vector2, _rot: float) -> Vector2:
 	return _vec.rotated(deg2rad(_rot))
 
+# Return cos of degree_angle passed
+func dcos(_angle:float) -> float:
+	return cos(deg2rad(_angle))
+
+# Return sin of degree_angle passed
+func dsin(_angle:float) -> float:
+	return sin(deg2rad(_angle))
+
+
+
+func lenghtdir_x(_len, _dir) -> float:
+	return _len * dcos(_dir)
+
+func lenghtdir_y(_len, _dir) -> float:
+	return _len * -dsin(_dir)
+	
 
 #im not sure if this works lol? takes a deg. angle and returns it as a directional vector2. 0 returns Vector2.RIGHT
 func angle2vector(_angle: float) -> Vector2:
