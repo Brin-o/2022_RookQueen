@@ -28,7 +28,7 @@ func enemy_turn():
 	# Very basic turn: one of the enemies randomly moves, the rest does nothing
 	for enemy in board.enemies:
 		enemy.do_random_move()
-	
+		yield(enemy, "finished_movement")
 	# Timer?
 	next_turn()
 

@@ -13,7 +13,7 @@ export var max_damage : int = 4
 
 export var move_timer : float = 0.5
 
-
+var moving : bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -36,6 +36,7 @@ func can_move_to():
 func move_to(var pos : Vector2):
 	move_no_turn(pos)
 	if type == "Player":
+		yield(self, "finished_movement")
 		GameManager.next_turn()
 
 func _on_BasePiece_finished_movement():
@@ -126,6 +127,13 @@ func anim_movement():
 	movement_lerp = min(movement_lerp+movement_lerp_speed, 1)
 	var _x = lerp(mov_pos_old.x, mov_pos_new.x, movement_lerp)
 	var _y = lerp(mov_pos_old.y, mov_pos_new.y, movement_lerp) + Util.lenghtdir_y(mov_jump_height,180*movement_lerp)
+
+	var _previous_moving = moving
+	moving = position.x != _x or position.y != _y
+
+	if not moving and _previous_moving:
+		emit_signal("finished_movement")
+
 	position.x = _x
 	position.y = _y
 	pass
