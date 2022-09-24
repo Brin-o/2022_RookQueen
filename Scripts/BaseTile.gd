@@ -42,7 +42,7 @@ func _set_sprites():
 		printerr("Wrong color in tile")
 
 	$Sprite/ChasmSprite.visible = type == "C"
-	$Sprite/FloorSprite.visible = type == "F"
+	$Sprite/FloorSprite.visible = type == "."
 	$Sprite/WallSprite.visible = type == "W"
 	$Sprite/IceSprite.visible = type == "I"
 	$Sprite/SpikesSprite.visible = type == "S"
@@ -50,7 +50,7 @@ func _set_sprites():
 	$Sprite/KeySprite.visible = type == "K"
 
 func is_walkable():
-	return type == "F" or type == "I" or type == "S" or type == "D" or type == "K" 
+	return type == "." or type == "I" or type == "S" or type == "D" or type == "K" 
 
 func contains_enemy():
 	return contains != null and contains.type == "Enemy"

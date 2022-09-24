@@ -1,5 +1,5 @@
-FFFPF
-FFFFH
-FhPWF
-FFFFF
-FFFFF
+.....
+..C..
+..C..
+.RCR.
+..h..

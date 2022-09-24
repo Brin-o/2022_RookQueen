@@ -51,7 +51,7 @@ func generate_board():
 			new_tile.pos = Vector2(row, column)
 			new_tile.color = "White" if(row%2==0 and column%2!=0 or row%2!=0 and column%2==0) else "Black"
 			if tile in enemies_type:
-				new_tile.type = "F"
+				new_tile.type = "."
 				spawn_piece(tile, new_tile.pos)
 			else:
 				new_tile.type = tile
