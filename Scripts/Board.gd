@@ -112,6 +112,8 @@ func spawn_piece(tile : String, pos : Vector2):
 	piece.type = "Player" if tile == tile.to_lower() else "Enemy"
 	if piece.type == "Enemy":
 		enemies.append(piece)
+	else:
+		GameManager.player = piece
 	get_parent().call_deferred("add_child", piece)
 
 func remove_from_enemies(enemy):
