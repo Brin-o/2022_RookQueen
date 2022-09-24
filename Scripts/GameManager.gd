@@ -30,3 +30,8 @@ func enemy_turn():
 	
 	# Timer?
 	next_turn()
+
+func show_tiles(should_show):
+	var tiles = selected_piece.can_move_to()
+	for tile_pos in tiles:
+		board.set_selectable_outline(tile_pos, should_show)

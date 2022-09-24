@@ -116,3 +116,8 @@ func spawn_piece(tile : String, pos : Vector2):
 
 func remove_from_enemies(enemy):
 	enemies.erase(enemy)
+
+func set_selectable_outline(var pos : Vector2, should_show : bool):
+	var tile = get_tile(pos)
+	tile.get_node("Selection/Attack").visible = should_show and tile.contains_enemy()
+	tile.get_node("Selection/Move").visible = should_show and not tile.contains_enemy()
