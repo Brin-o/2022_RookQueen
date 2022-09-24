@@ -69,6 +69,7 @@ texture = ExtResource( 10 )
 input_pickable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+visible = false
 shape = SubResource( 1 )
 
 [connection signal="input_event" from="KinematicBody2D" to="." method="_on_KinematicBody2D_input_event"]
