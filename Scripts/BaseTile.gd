@@ -35,19 +35,19 @@ func _set_sprites():
 	#Show the correct sprite and hide all of the rest
 
 	if color == "White":
-		modulate = Color(1,1,1)
+		$Sprite.modulate = Color(1,1,1)
 	elif color == "Black":
-		modulate = Color(0,0,0)
+		$Sprite.modulate = Color(0,0,0)
 	else:
 		printerr("Wrong color in tile")
 
-	$ChasmSprite.visible = type == "C"
-	$FloorSprite.visible = type == "F"
-	$WallSprite.visible = type == "W"
-	$IceSprite.visible = type == "I"
-	$SpikesSprite.visible = type == "S"
-	$DoorSprite.visible = type == "D"
-	$KeySprite.visible = type == "K"
+	$Sprite/ChasmSprite.visible = type == "C"
+	$Sprite/FloorSprite.visible = type == "F"
+	$Sprite/WallSprite.visible = type == "W"
+	$Sprite/IceSprite.visible = type == "I"
+	$Sprite/SpikesSprite.visible = type == "S"
+	$Sprite/DoorSprite.visible = type == "D"
+	$Sprite/KeySprite.visible = type == "K"
 
 func is_walkable():
 	return type == "F" or type == "I" or type == "S" or type == "D" or type == "K" 

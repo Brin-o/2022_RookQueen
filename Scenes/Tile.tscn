@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/BaseTile.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/KeySprite.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Sprites/DoorSprite.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/SpikesSprite.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Tiles/tile_f.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/selection_border.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
@@ -23,34 +24,49 @@ __meta__ = {
 [node name="Border" type="Sprite" parent="."]
 texture = ExtResource( 5 )
 
-[node name="ChasmSprite" type="Sprite" parent="."]
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="ChasmSprite" type="Sprite" parent="Sprite"]
 visible = false
 texture = ExtResource( 4 )
 
-[node name="FloorSprite" type="Sprite" parent="."]
+[node name="FloorSprite" type="Sprite" parent="Sprite"]
 texture = ExtResource( 9 )
 
-[node name="WallSprite" type="Sprite" parent="."]
+[node name="WallSprite" type="Sprite" parent="Sprite"]
 visible = false
 texture = ExtResource( 3 )
 
-[node name="IceSprite" type="Sprite" parent="."]
+[node name="IceSprite" type="Sprite" parent="Sprite"]
 visible = false
 texture = ExtResource( 6 )
 
-[node name="SpikesSprite" type="Sprite" parent="."]
+[node name="SpikesSprite" type="Sprite" parent="Sprite"]
 visible = false
 texture = ExtResource( 8 )
 
-[node name="DoorSprite" type="Sprite" parent="."]
+[node name="DoorSprite" type="Sprite" parent="Sprite"]
 visible = false
 texture = ExtResource( 7 )
 
-[node name="KeySprite" type="Sprite" parent="."]
+[node name="KeySprite" type="Sprite" parent="Sprite"]
 visible = false
 texture = ExtResource( 2 )
 
+[node name="Selection" type="Node2D" parent="."]
+
+[node name="Move" type="Sprite" parent="Selection"]
+visible = false
+self_modulate = Color( 0.75, 0.75, 0.75, 1 )
+texture = ExtResource( 10 )
+
+[node name="Attack" type="Sprite" parent="Selection"]
+visible = false
+self_modulate = Color( 0.62, 0.62, 0.62, 1 )
+texture = ExtResource( 10 )
+
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+visible = false
 input_pickable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
