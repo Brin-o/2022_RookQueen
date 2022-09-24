@@ -13,7 +13,7 @@ func can_move_to():
 		while boardScene.is_steppable(next_tile):
 			if next_tile != current_tile:
 				tiles.push_back(next_tile)
-			if boardScene.get_tile(next_tile).contains_enemy():
+			if boardScene.get_tile(next_tile).contains_opponent(type):
 				break
 			next_tile += dir
 
