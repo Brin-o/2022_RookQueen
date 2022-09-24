@@ -48,8 +48,12 @@ export var palettes: Dictionary = {
 	]
 }
 
+var colEnemy = Color(0.615, 0.615, 0.61)
+var colPlayer = Color(0.945, 0.945, 0.945)
+
 
 func _ready():
+	GameManager.recolor = self;
 	set_current_palette(palettes[starting_color])
 	pass
 
