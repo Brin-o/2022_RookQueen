@@ -26,8 +26,8 @@ func next_turn():
 
 func enemy_turn():
 	# Very basic turn: one of the enemies randomly moves, the rest does nothing
-	#for enemy in board.enemies:
-	#	enemy.do_random_move()
+	for enemy in board.enemies:
+		enemy.do_random_move()
 	
 	# Timer?
 	next_turn()

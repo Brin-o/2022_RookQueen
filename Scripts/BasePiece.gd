@@ -8,7 +8,9 @@ var current_tile : Vector2
 var boardScene : Board
 var type = "Player" #Player or Enemy
 export var hp : int = 10
-export var damage : int = 1
+export var min_damage : int = 1
+export var max_damage : int = 4
+
 export var move_timer : float = 0.5
 
 
@@ -108,7 +110,7 @@ var pivot_selected_pos = 3
 func anim_selection():
 	var pivot = $SpritePivot.position
 	if type == "Player":
-		if GameManager.selected_piece == self or $Tween.is_active():
+		if GameManager.selected_piece == self:
 			$SpritePivot.position.y = lerp(pivot.y, pivot_selected_pos, 0.3)
 		else:
 			$SpritePivot.position.y = lerp(pivot.y, pivot_pos, 0.8)
