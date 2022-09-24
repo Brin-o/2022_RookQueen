@@ -2,7 +2,9 @@ extends Node2D
 
 class_name BasePiece
 
+signal finished_internal_movement
 signal finished_movement
+signal finished_push
 
 var current_tile : Vector2
 var boardScene : Board
@@ -14,6 +16,8 @@ export var max_damage : int = 4
 export var move_timer : float = 0.5
 
 var moving : bool = false
+var attacking : bool = false
+var being_pushed : bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -62,6 +66,7 @@ func do_random_move():
 
 func push(from : BasePiece, direction : Vector2):
 	var pushed_to = current_tile + direction
+	#being_pushed = true
 	
 	if not boardScene.is_inbounds(pushed_to):
 		die()
@@ -72,6 +77,11 @@ func push(from : BasePiece, direction : Vector2):
 		return true
 
 	elif boardScene.get_tile(pushed_to).type == "W":
+		anim_start_movement(boardScene.board_position(current_tile), boardScene.board_position(pushed_to))
+		yield(self, "finished_internal_movement")
+		anim_start_movement(boardScene.board_position(pushed_to), boardScene.board_position(current_tile))
+		yield(self, "finished_internal_movement")
+		#yield(self, "finished_push")
 		from.push(self, -direction)
 		return false
 	
@@ -79,11 +89,14 @@ func push(from : BasePiece, direction : Vector2):
 		var can_go = boardScene.get_tile(pushed_to).contains.push(self, direction)
 		if can_go:
 			move_no_turn(pushed_to)
+			yield(self, "finished_push")
+			being_pushed = false
 		return true
 		#apply hit damage?
 
 	else:
 		move_no_turn(pushed_to)
+		being_pushed = false
 		return true
 
 func move_no_turn(var pos : Vector2):
@@ -92,6 +105,16 @@ func move_no_turn(var pos : Vector2):
 	var new_pos = boardScene.board_position(pos)
 	anim_start_movement(position, new_pos)
 	boardScene.set_tile_piece(current_tile, self)
+
+func move_only_visual(var pos : Vector2):
+	var new_pos = boardScene.board_position(pos)
+	anim_start_movement(position, new_pos)
+
+func move_only_logic(var pos : Vector2):
+	boardScene.set_tile_piece(current_tile, null)
+	current_tile = pos
+	boardScene.set_tile_piece(current_tile, self)
+	print("ONLY LOGIC")
 
 
 # ANIMATIONS
@@ -132,8 +155,27 @@ func anim_movement():
 	moving = position.x != _x or position.y != _y
 
 	if not moving and _previous_moving:
-		emit_signal("finished_movement")
+
+		if being_pushed:
+			emit_signal("finished_push")
+			print("emitting push")
+		elif not attacking:
+			emit_signal("finished_movement")
+		else:
+			emit_signal("finished_internal_movement")
 
 	position.x = _x
 	position.y = _y
 	pass
+
+func attack(_original_position, _attack_position):
+	attacking = true
+	anim_start_movement(_original_position, _attack_position)
+	yield(self, "finished_internal_movement")
+	anim_start_movement(_attack_position, _original_position)
+	yield(self, "finished_internal_movement")
+	attacking = false
+	emit_signal("finished_movement")
+	if type == "Player":
+		GameManager.next_turn()
+

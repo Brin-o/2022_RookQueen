@@ -19,10 +19,13 @@ func set_selected_piece(piece):
 
 func next_turn():
 	if turn == "Player":
+		print("Player finished turn. Enemy goes.")
 		turn = "Enemy"
 		enemy_turn()
 	else:
 		turn = "Player"
+		print("Enemy finished turn. Player goes.")
+
 
 func enemy_turn():
 	# Very basic turn: one of the enemies randomly moves, the rest does nothing

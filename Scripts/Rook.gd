@@ -21,7 +21,7 @@ func can_move_to():
 	
 func move_to(var pos : Vector2):
 	if boardScene.get_tile(pos).contains_opponent(type):
-		position = boardScene.board_position(pos)
+		#position = boardScene.board_position(pos)
 		var enemy = boardScene.get_tile(pos).contains
 		var damage:int = round(rand_range(min_damage, max_damage))
 		var killed = enemy.take_damage(damage)
@@ -29,9 +29,26 @@ func move_to(var pos : Vector2):
 			.move_to(pos)
 		else:
 			#wait for a bit
-			var can_move_to_enemy_place = enemy.push(self, (pos - current_tile).normalized())
-			if can_move_to_enemy_place:
-				print("Moving to")
-				.move_to(pos)
+			attacking = true
+			.move_only_visual(pos)
+			yield(self, "finished_internal_movement")
+			enemy.push(self, (pos - current_tile).normalized())
+			yield(enemy, "finished_push")
+			.move_only_logic(pos)
+			attacking = false
+			GameManager.next_turn()
+				
 	else:
 		.move_to(pos)
+
+
+func attack(_original_position, _attack_position):
+	attacking = true
+	anim_start_movement(_original_position, _attack_position)
+	yield(self, "finished_internal_movement")
+	anim_start_movement(_attack_position, _original_position)
+	yield(self, "finished_internal_movement")
+	attacking = false
+	emit_signal("finished_movement")
+	if type == "Player":
+		GameManager.next_turn()

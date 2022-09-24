@@ -23,13 +23,15 @@ func can_move_to():
 
 func move_to(var pos : Vector2):
     if boardScene.get_tile(pos).contains_opponent(type):
-        position = boardScene.board_position(pos)
+        var attack_position = boardScene.board_position(pos)
         var damage : int = round(rand_range(min_damage, max_damage))
         var killed = boardScene.get_tile(pos).contains.take_damage(damage)
         if killed:
             .move_to(pos)
         else:
-            #wait for a bi                                  t
-            position = boardScene.board_position(current_tile)
+            .attack(boardScene.board_position(current_tile), attack_position)
+            
     else:
         .move_to(pos)
+
+    #emit_signal("finished_movement")
