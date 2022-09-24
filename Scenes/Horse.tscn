@@ -24,4 +24,6 @@ self_modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
 position = Vector2( 38, 13 )
 texture = ExtResource( 3 )
 
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="finished_movement" from="." to="." method="_on_BasePiece_finished_movement"]

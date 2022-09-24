@@ -35,9 +35,9 @@ func _set_sprites():
 	#Show the correct sprite and hide all of the rest
 
 	if color == "White":
-		$Sprite.modulate = Color(1,1,1)
+		$Sprite.modulate = GameManager.recolor.colTileWhite;
 	elif color == "Black":
-		$Sprite.modulate = Color(0,0,0)
+		$Sprite.modulate = GameManager.recolor.colTileBlack;
 	else:
 		printerr("Wrong color in tile")
 

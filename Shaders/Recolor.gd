@@ -48,6 +48,8 @@ export var palettes: Dictionary = {
 	]
 }
 
+var colTileBlack = Color(0.0, 0.0, 0.0)
+var colTileWhite = Color(0.25, 0.25, 0.25)
 var colEnemy = Color(0.615, 0.615, 0.61)
 var colPlayer = Color(0.945, 0.945, 0.945)
 
