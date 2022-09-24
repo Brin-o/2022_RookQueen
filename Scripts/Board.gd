@@ -3,8 +3,9 @@ extends Node
 class_name Board
 
 var board : Array
-export var offset = 50
+var offset
 export var dimension = 1
+var res = 216
 export (PackedScene) var tile_scene
 
 export(PackedScene) var pawn
@@ -22,6 +23,7 @@ func _ready():
 	generate_board()
 	read_file()
 	GameManager.board = self
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,17 +39,20 @@ func read_file():
 
 
 func generate_board():
-	var lines = read_file()
+	var lines : Array = read_file()
 	var row = 0
 	var column = 0
 	board = []
+
+	var tile_instance = tile_scene.instance()
+	var tile_size = tile_instance.get_node("Sprite/FloorSprite").texture.get_size().x * tile_instance.get_node("Sprite/FloorSprite").scale.x + 4
+	offset = res/2 - ((len(lines)-1) * (tile_size/2))
 	
 	for line in lines:
 		board.append([])
 		for tile in line:
 			var new_tile = tile_scene.instance()
-			var tile_size = new_tile.get_node("Sprite/FloorSprite").texture.get_size().x * new_tile.get_node("Sprite/FloorSprite").scale.x + 4
-			new_tile.position = Vector2(column * tile_size + 50,row * tile_size + 50)
+			new_tile.position = Vector2(column * tile_size + offset,row * tile_size + offset)
 			new_tile.pos = Vector2(row, column)
 			new_tile.color = "White" if(row%2==0 and column%2!=0 or row%2!=0 and column%2==0) else "Black"
 			if tile in enemies_type:

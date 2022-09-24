@@ -1,7 +1,7 @@
 extends Node2D
 
 
-onready var piece : BasePiece = get_parent()
+onready var piece = get_parent()
 
 func _ready():
 	if piece.type == "Player":
