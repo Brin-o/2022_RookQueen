@@ -21,4 +21,6 @@ texture = ExtResource( 3 )
 
 [node name="UnitHP" parent="." instance=ExtResource( 4 )]
 
+[node name="YSort" type="YSort" parent="."]
+
 [connection signal="finished_movement" from="." to="." method="_on_BasePiece_finished_movement"]
