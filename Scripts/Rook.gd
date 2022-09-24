@@ -18,3 +18,18 @@ func can_move_to():
 			next_tile += dir
 
 	return tiles
+	
+func move_to(var pos : Vector2):
+	if boardScene.get_tile(pos).contains_opponent(type):
+		position = boardScene.board_position(pos)
+		var enemy = boardScene.get_tile(pos).contains
+
+		var killed = enemy.take_damage(damage)
+		if killed:
+			.move_to(pos)
+		else:
+			#wait for a bit
+			enemy.push((pos - current_tile).normalized())
+			.move_to(pos)
+	else:
+		.move_to(pos)

@@ -23,7 +23,6 @@ func can_move_to():
 
 func move_to(var pos : Vector2):
     if boardScene.get_tile(pos).contains_opponent(type):
-        print("Attacking an enemy!")
         position = boardScene.board_position(pos)
         var killed = boardScene.get_tile(pos).contains.take_damage(damage)
         if killed:
