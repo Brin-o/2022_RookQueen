@@ -79,6 +79,7 @@ func enemy_turn():
 							any_attacked = true
 						next_piece_idx += 1
 						next_piece_idx %= len(board.enemies)
+						show_next_attack_tiles(board.enemies[next_piece_idx])
 						break
 				i+=1
 	else:
@@ -97,3 +98,9 @@ func change_level(_num):
 	main_scene.add_child(levels[_num-1].instance())
 	player_hp += 2
 	
+func show_next_attack():
+	board.enemies[next_piece_idx].set_active_piece(true)
+
+func show_next_attack_tiles(piece):
+	for enemy in board.enemies:
+		enemy.set_active_piece(enemy == piece)

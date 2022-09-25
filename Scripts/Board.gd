@@ -59,6 +59,8 @@ func generate_board():
 		row += 1
 		column = 0
 
+	enemies[0].set_active_piece(true)
+
 func get_tile(pos):
 	assert(is_inbounds(pos), "You were trying to access an out of bounds position")
 	return board[pos.x][pos.y]
@@ -135,6 +137,7 @@ func is_pawn_on_edge(piece):
 func check_promote(piece):
 	if piece.type == "Enemy" and is_pawn_on_edge(piece):
 		promote(piece)
+		GameManager.show_next_attack()
 		GameManager.next_turn()
 
 func promote(piece):
