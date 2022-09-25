@@ -8,7 +8,10 @@
 [node name="Bishop" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
+hp = null
 min_damage = 2
+max_damage = null
+move_timer = null
 
 [node name="SpritePivot" type="Node2D" parent="."]
 position = Vector2( 0, 7 )
