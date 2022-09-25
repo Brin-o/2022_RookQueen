@@ -23,7 +23,7 @@ func move_to(var pos : Vector2):
 	if boardScene.get_tile(pos).contains_opponent(type):
 		#position = boardScene.board_position(pos)
 		var enemy = boardScene.get_tile(pos).contains
-		var damage:int = round(rand_range(min_damage, max_damage))
+		var damage : int = round(rand_range(min_damage, max_damage))
 		var killed = enemy.take_damage(damage)
 		if killed:
 			.move_to(pos)
@@ -32,11 +32,10 @@ func move_to(var pos : Vector2):
 			attacking = true
 			.move_only_visual(pos)
 			yield(self, "finished_internal_movement")
-			var pushed_back = enemy.push(self, (pos - current_tile).normalized())
+			var pushback = enemy.pushback(self, (pos - current_tile).normalized())
+			enemy.push(self, (pos - current_tile).normalized())
 			yield(enemy, "finished_push")
-			print(enemy.being_pushed)
-			print(enemy.being_pushed_internal)
-			if not pushed_back:
+			if not pushback:
 				.move_only_logic(pos)
 			attacking = false
 			GameManager.next_turn()

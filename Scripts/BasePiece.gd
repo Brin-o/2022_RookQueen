@@ -102,19 +102,43 @@ func push(from : BasePiece, direction : Vector2):
 		being_pushed = false
 		return true
 	
-	elif boardScene.get_tile(pushed_to).contains_enemy():
-		boardScene.get_tile(pushed_to).contains.push(self, direction)
-		move_no_turn(pushed_to)
-		yield(self, "finished_push")
+	elif boardScene.get_tile(pushed_to).contains != null:
+		being_pushed_internal = true
+		move_only_visual(pushed_to)
+		yield(self, "finished_internal_push")
+		var enemy = boardScene.get_tile(pushed_to).contains
+		var pushback = enemy.pushback(self, direction)
+		enemy.push(self, direction)
+		print("ENEMY PUSHED")
+		yield(enemy, "finished_push")
+		being_pushed_internal = false
+		if not pushback:
+			move_only_logic(pushed_to)
 		being_pushed = false
-		return false
-		#apply hit damage?
+		emit_signal("finished_push")
 
 	else:
 		move_no_turn(pushed_to)
 		yield(self, "finished_push")
 		being_pushed = false
 		return true
+
+func pushback(_from : BasePiece, direction : Vector2):
+	var pushed_to = current_tile + direction	
+	if not boardScene.is_inbounds(pushed_to):
+		return false
+	
+	elif boardScene.get_tile(pushed_to).type == "C":
+		return false
+
+	elif boardScene.get_tile(pushed_to).type == "W":
+		return true
+	
+	elif boardScene.get_tile(pushed_to).contains_enemy():
+		return boardScene.get_tile(pushed_to).contains.pushback(self, direction)
+
+	else:
+		return false
 
 func move_no_turn(var pos : Vector2):
 	print(self, "Moving to ",pos)
@@ -132,6 +156,7 @@ func move_only_logic(var pos : Vector2):
 	boardScene.set_tile_piece(current_tile, null)
 	current_tile = pos
 	boardScene.set_tile_piece(current_tile, self)
+	print("ONLY LOGIC")
 
 
 # ANIMATIONS
