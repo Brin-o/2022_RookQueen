@@ -38,6 +38,7 @@ func move_to(var pos : Vector2):
 			if not pushback:
 				.move_only_logic(pos)
 			attacking = false
+			print("Next turn from ROOK")
 			GameManager.next_turn()
 				
 	else:

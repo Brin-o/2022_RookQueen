@@ -133,14 +133,15 @@ func push(from : BasePiece, direction : Vector2):
 		being_pushed_internal = true
 		move_only_visual(pushed_to)
 		yield(self, "finished_internal_push")
+		being_pushed_internal = false
 		var enemy = boardScene.get_tile(pushed_to).contains
 		var pushback = enemy.pushback(self, direction)
 		enemy.push(self, direction)
-		print("ENEMY PUSHED")
 		yield(enemy, "finished_push")
-		being_pushed_internal = false
+		being_pushed = false
 		if not pushback:
 			move_only_logic(pushed_to)
+			emit_signal("finished_push")
 
 	else:
 		move_no_turn(pushed_to)
