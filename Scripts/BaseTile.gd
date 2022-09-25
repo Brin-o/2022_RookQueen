@@ -35,8 +35,6 @@ func _process(delta):
 	pass
 
 func _set_sprites():
-	#Show the correct sprite and hide all of the rest
-
 	if color == "White":
 		$Sprite.modulate = GameManager.recolor.colTileWhite;
 	elif color == "Black":
@@ -79,8 +77,6 @@ func _on_KinematicBody2D_input_event(_viewport:Node, event:InputEvent, _shape_id
 
 
 func corner_border_generation():
-
-	# Check if its on the edge
 	if pos.y == GameManager.board.board.size() -1:
 		$EdgeBorderCorners/TopRight.visible = true
 		$EdgeBorderCorners/BottomRight.visible = true
@@ -93,21 +89,11 @@ func corner_border_generation():
 	if pos.x == 0:
 		$EdgeBorderCorners/TopLeft.visible = true
 		$EdgeBorderCorners/TopRight.visible = true
+	pass
 
 
-	#topleft
-	# if not GameManager.board.is_inbounds(Vector2(pos.x-1, pos.y-1)):
-	# 	$EdgeBorderCorners/TopLeft.visible = true
-	# #topright
-	# if not GameManager.board.is_inbounds(Vector2(pos.x+1, pos.y-1)):
-	# 	print("top right of ", pos, " is nothing")
-	# 	$EdgeBorderCorners/TopRight.visible = true
-
-	# # var target = Vector2(pos.x-1, pos.y+1)
-	# # if not GameManager.board.is_inbounds(target):
-	# # 	print(pos, "has no bottom right")
-	# # 	$EdgeBorderCorners/BottomRight.visible = true	
-
-	# if not GameManager.board.is_inbounds(Vector2(pos.x+1, pos.y+1)):
-	# 	$EdgeBorderCorners/BottomRight.visible = true	
+func end_turn_effect():
+	if type=="S":
+		if !contains:
+			contains.take_damage(1)
 	pass

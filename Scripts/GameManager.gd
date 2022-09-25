@@ -23,6 +23,9 @@ var levels : Array = [
 	preload("res://Levels/Level9.tscn"),
 	preload("res://Levels/Level10.tscn")] 
 
+var player_hp = 2
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace 
@@ -75,4 +78,5 @@ func change_level(_num):
 	print("going to level", _num)
 	level.call_deferred("queue_free")
 	main_scene.add_child(levels[_num-1].instance())
+	player_hp += 2
 	

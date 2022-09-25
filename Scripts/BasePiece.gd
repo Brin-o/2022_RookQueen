@@ -32,6 +32,8 @@ func _ready():
 	boardScene.set_tile_piece(current_tile, self)
 	if type=="Enemy":
 		$SpritePivot/Sprite.self_modulate = GameManager.recolor.colEnemy;
+	elif type == "Player":
+		hp = GameManager.player_hp
 	connect("took_damage", $SpritePivot, "take_dmg")
 
 
