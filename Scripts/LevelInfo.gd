@@ -1,4 +1,5 @@
 extends Node2D
+class_name LevelInfo
 
 export var num : int = 1
 

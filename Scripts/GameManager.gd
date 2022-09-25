@@ -5,7 +5,7 @@ var turn = "Player"
 var board : Board
 var recolor : ColorManager
 var player
-var level
+var level : LevelInfo
 
 export var one_at_a_time : bool = true
 var next_piece_idx : int = 0
@@ -25,15 +25,15 @@ var levels : Array = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass # Replace 
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_left"):
-		change_level(1)
+	if Input.is_action_just_released("ui_left"):
+		change_level(level.num-1)
 		pass
 	if Input.is_action_just_pressed("ui_right"):
-		change_level(5)
+		change_level(level.num+1)
 		pass
 	pass
 
@@ -72,6 +72,7 @@ func show_tiles(should_show):
 
 
 func change_level(_num):
-	level.queue_free()
+	print("going to level", _num)
+	level.call_deferred("queue_free")
 	main_scene.add_child(levels[_num-1].instance())
 	
