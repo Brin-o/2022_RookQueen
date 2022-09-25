@@ -5,6 +5,8 @@ var turn = "Player"
 var board : Board
 var recolor : ColorManager
 var player
+export var one_at_a_time : bool = false
+var next_piece_idx : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,11 +30,17 @@ func next_turn():
 
 
 func enemy_turn():
-	# Very basic turn: one of the enemies randomly moves, the rest does nothing
+	var i = 0
+
+	next_piece_idx = clamp(next_piece_idx, 0, len(board.enemies))
 	for enemy in board.enemies:
-		enemy.do_random_move()
-		yield(enemy, "finished_movement")
-	# Timer?
+		if not one_at_a_time or one_at_a_time and i == next_piece_idx:
+			enemy.do_random_move()
+			yield(enemy, "finished_movement")
+		i+=1
+	next_piece_idx += 1
+	next_piece_idx %= len(board.enemies)
+	
 	next_turn()
 
 func show_tiles(should_show):
