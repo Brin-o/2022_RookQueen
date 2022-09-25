@@ -22,7 +22,7 @@ func can_move_to():
 
 
 func move_to(var pos : Vector2):
-	var directions = [Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1), Vector2(1,1)]
+	var directions = [Vector2(0,-1), Vector2(0,1), Vector2(1,0), Vector2(-1,0)]
 	.move_no_turn(pos)
 
 	for dir in directions:
