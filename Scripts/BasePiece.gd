@@ -6,7 +6,8 @@ signal finished_internal_movement
 signal finished_movement
 signal finished_push
 signal finished_internal_push
-signal take_damage
+signal took_damage
+signal died
 
 var current_tile : Vector2
 var boardScene : Board
@@ -31,6 +32,7 @@ func _ready():
 	boardScene.set_tile_piece(current_tile, self)
 	if type=="Enemy":
 		$SpritePivot/Sprite.self_modulate = GameManager.recolor.colEnemy;
+	connect("took_damage", $SpritePivot, "take_dmg")
 
 
 func _physics_process(delta):
@@ -53,7 +55,10 @@ func take_damage(damage : int):
 	hp -= damage
 	if hp <= 0:
 		die()
+		emit_signal("died")
 		return true
+	else:
+		emit_signal("took_damage")
 	return false
 
 func die():

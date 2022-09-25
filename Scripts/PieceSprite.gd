@@ -17,3 +17,8 @@ func _physics_process(delta):
 	scale.x = x_scale
 	scale.y = 1/x_scale
 	pass
+
+
+func take_dmg():
+	print("take dmg connected")
+	x_scale = 2
