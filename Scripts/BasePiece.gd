@@ -186,6 +186,8 @@ func anim_selection():
 			$SpritePivot.position.y = lerp(pivot.y, pivot_selected_pos, 0.3)
 		else:
 			$SpritePivot.position.y = lerp(pivot.y, pivot_pos, 0.8)
+	else:
+		$SpritePivot.position.y = lerp(pivot.y, pivot_pos, 0.8)
 
 
 func anim_start_movement(_op, _np):
