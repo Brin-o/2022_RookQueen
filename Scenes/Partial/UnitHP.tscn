@@ -7,6 +7,8 @@
 font_data = ExtResource( 2 )
 
 [node name="UnitHP" type="Node2D"]
+position = Vector2( -1, 0 )
+z_index = 4
 script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="."]
