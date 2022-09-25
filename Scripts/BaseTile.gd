@@ -118,9 +118,9 @@ func spike_setcolor():
 		target_c = GameManager.recolor.colTileBlack;
 	
 	$Sprite/SpikesSprite/FloorSprite.self_modulate = target_c
-	$Sprite/SpikesSprite/Spike1/Spike.self_modulate = GameManager.recolor.palettes["grays"][3]
+	$Sprite/SpikesSprite/Spike1/Spike.self_modulate = GameManager.recolor.palettes["grays"][0]
 	$Sprite/SpikesSprite/Spike1/SpikeOutline.self_modulate = GameManager.recolor.palettes["grays"][7]
-	$Sprite/SpikesSprite/Spike2/Spike.self_modulate = GameManager.recolor.palettes["grays"][3]
+	$Sprite/SpikesSprite/Spike2/Spike.self_modulate = GameManager.recolor.palettes["grays"][0]
 	$Sprite/SpikesSprite/Spike2/SpikeOutline.self_modulate = GameManager.recolor.palettes["grays"][7]
 
 	pass
