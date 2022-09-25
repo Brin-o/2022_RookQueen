@@ -77,8 +77,6 @@ func do_random_move():
 		move_to(possible_moves[randi()%possible_moves.size()])
 
 func push(from : BasePiece, direction : Vector2):
-	print("From: ",from," PUSHING " , self)
-
 	
 	var pushed_to = current_tile + direction
 
@@ -113,6 +111,25 @@ func push(from : BasePiece, direction : Vector2):
 		return true
 	
 	elif boardScene.get_tile(pushed_to).contains != null:
+		if boardScene.get_tile(pushed_to).contains == self:
+			#VERY HACKY DONT MIND ME
+			print(self)
+			being_pushed_internal = true
+			move_only_visual(pushed_to)
+			yield(self, "finished_internal_push")
+			var enemy = boardScene.get_tile(pushed_to + direction).contains
+			if enemy == null:
+				being_pushed = false
+				being_pushed_internal = false
+				emit_signal("finished_push")
+				return
+			var pushback = enemy.pushback(self, direction)
+			enemy.push(self, direction)	
+			yield(enemy, "finished_push")
+			being_pushed = false
+			being_pushed_internal = false
+			emit_signal("finished_push")
+			return
 		being_pushed_internal = true
 		move_only_visual(pushed_to)
 		yield(self, "finished_internal_push")
@@ -206,16 +223,16 @@ func anim_movement():
 
 	if not moving and _previous_moving:
 		if being_pushed and not being_pushed_internal:
-			#print("Emitting finished push from ", self)
+			print("Emitting finished push from ", self)
 			emit_signal("finished_push")
 		elif being_pushed and being_pushed_internal:
-			#print("Emitting finished push internal from ", self)
+			print("Emitting finished push internal from ", self)
 			emit_signal("finished_internal_push")
 		elif attacking:
-			#print("Emitting finished internal movement ", self)
+			print("Emitting finished internal movement ", self)
 			emit_signal("finished_internal_movement")
 		else:
-			#print("Emitting finished movement ", self)
+			print("Emitting finished movement ", self)
 			emit_signal("finished_movement")
 
 	position.x = _x
