@@ -62,6 +62,9 @@ func contains_opponent(var check_type):
 	var opponent = "Player" if check_type == "Enemy" else "Enemy"
 	return contains != null and contains.type == opponent
 
+func contains_ally(var check_type):
+	return contains != null and contains.type == check_type
+
 func _on_KinematicBody2D_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 	if GameManager.turn == "Enemy":
 		return
