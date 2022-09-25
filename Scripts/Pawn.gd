@@ -8,7 +8,7 @@ func can_move_to():
     var up = -1 if type == "Player" else 1
 
     var fwd = Vector2(current_tile.x+up, current_tile.y)
-    if boardScene.is_steppable(fwd):
+    if boardScene.is_steppable(fwd) and boardScene.get_tile(fwd).contains == null:
         tiles.push_back(fwd)
 
     var fwd_left = Vector2(current_tile.x+up, current_tile.y-1)
