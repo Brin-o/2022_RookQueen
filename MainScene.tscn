@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scenes/Board.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Levels/Level1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Shaders/Recolor.gd" type="Script" id=2]
 [ext_resource path="res://Shaders/ColorRemap.shader" type="Shader" id=3]
 [ext_resource path="res://Scripts/GameManager.gd" type="Script" id=4]
@@ -53,9 +53,6 @@ palettes = {
 
 [node name="Tween" type="Tween" parent="ShaderL1/ColorManager"]
 
-[node name="Board" parent="." instance=ExtResource( 1 )]
-dimension = 9
-
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 108, 108 )
 rotating = true
@@ -82,3 +79,16 @@ margin_bottom = 14.0
 custom_fonts/font = SubResource( 2 )
 text = "HP: 10"
 align = 1
+
+[node name="LVL" type="Node2D" parent="UI"]
+position = Vector2( 108, 19 )
+
+[node name="Label" type="Label" parent="UI/LVL"]
+margin_left = -18.0
+margin_right = 22.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 2 )
+text = "LVL: 1"
+align = 1
+
+[node name="Level1" parent="." instance=ExtResource( 1 )]

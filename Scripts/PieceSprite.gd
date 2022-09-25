@@ -20,5 +20,4 @@ func _physics_process(delta):
 
 
 func take_dmg():
-	print("take dmg connected")
 	x_scale = 2

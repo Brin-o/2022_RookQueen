@@ -1,0 +1,11 @@
+bugs:
+- attacking an enemy 
+- bishop does not move on his turn
+- rook richoche 
+
+todo:
+- spike tiles
+- key/door tile
+- end of level tiles
+- level swapping
+- piece swapping between level

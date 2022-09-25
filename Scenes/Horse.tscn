@@ -11,6 +11,9 @@
 [node name="Horse" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
+hp = 6
+min_damage = 3
+max_damage = 6
 
 [node name="SpritePivot" type="Node2D" parent="."]
 position = Vector2( 0, 8 )

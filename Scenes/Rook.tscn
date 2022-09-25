@@ -8,6 +8,7 @@
 [node name="Rook" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
+hp = 8
 
 [node name="SpritePivot" type="Node2D" parent="."]
 position = Vector2( 0, 8.5 )

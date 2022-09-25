@@ -25,15 +25,9 @@ func _ready():
 	GameManager.board = self
 	
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func read_file():
 	var file = File.new()
-	file.open("res://test.txt", file.READ)
+	file.open("res://Levels/level" + str(get_parent().num) + ".txt", file.READ)
 	var content = file.get_as_text()
 	return content.split("\n")
 
