@@ -76,6 +76,7 @@ func show_tiles(should_show):
 
 
 func change_level(_num):
+	player_hp = player.hp
 	print("going to level", _num)
 	level.call_deferred("queue_free")
 	main_scene.add_child(levels[_num-1].instance())
