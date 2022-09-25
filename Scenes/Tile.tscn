@@ -124,18 +124,19 @@ frames = SubResource( 2 )
 [node name="FloorSprite" type="Sprite" parent="Sprite/SpikesSprite"]
 texture = ExtResource( 9 )
 
-[node name="Spike1" parent="Sprite/SpikesSprite" instance=ExtResource( 8 )]
-position = Vector2( -24, -12 )
-
 [node name="Spike2" parent="Sprite/SpikesSprite" instance=ExtResource( 8 )]
-position = Vector2( -28, -19 )
-
-[node name="Spike" parent="Sprite/SpikesSprite/Spike2" index="0"]
-frame = 1
+position = Vector2( -24, -10.5 )
+z_index = 1
 
 [node name="SpikeOutline" parent="Sprite/SpikesSprite/Spike2" index="1"]
+visible = false
+
+[node name="Spike1" parent="Sprite/SpikesSprite" instance=ExtResource( 8 )]
+position = Vector2( -28, -19 )
+
+[node name="SpikeOutline" parent="Sprite/SpikesSprite/Spike1" index="1"]
+visible = false
 modulate = Color( 1, 1, 1, 1 )
-frame = 1
 
 [node name="DoorSprite" type="Sprite" parent="Sprite"]
 visible = false
@@ -168,3 +169,4 @@ shape = SubResource( 1 )
 [connection signal="mouse_entered" from="KinematicBody2D" to="." method="_on_KinematicBody2D_mouse_entered"]
 
 [editable path="Sprite/SpikesSprite/Spike2"]
+[editable path="Sprite/SpikesSprite/Spike1"]

@@ -101,7 +101,10 @@ func corner_border_generation():
 func end_turn_effect():
 	if type=="S":
 		if is_instance_valid(contains):
-			print(contains, "on location ", pos, " takes 1 dmg from spikes")
+			#print(contains, "on location ", pos, " takes 1 dmg from spikes")
+			$Sprite/SpikesSprite/Spike1.anim_play()
+			$Sprite/SpikesSprite/Spike2.anim_play()
+
 			contains.take_damage(1)
 	pass
 
