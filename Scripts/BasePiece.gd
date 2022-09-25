@@ -6,6 +6,7 @@ signal finished_internal_movement
 signal finished_movement
 signal finished_push
 signal finished_internal_push
+signal take_damage
 
 var current_tile : Vector2
 var boardScene : Board
