@@ -14,3 +14,4 @@ todo:
 -- bishop should attack in a + pattern instead of X
 - pawn upgrade to random piece after reaching the end
 - timer between player move and enemy move
+- in base piece call set_active_piece(true) if this is the next piece that will perform a turn

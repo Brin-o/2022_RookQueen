@@ -250,3 +250,8 @@ func attack(_original_position, _attack_position):
 	if type == "Player":
 		GameManager.next_turn()
 
+func set_active_piece(_switch):
+	if _switch:
+		$SpritePivot/Sprite/Outline.self_modulate = GameManager.recolor.palettes["grays"][2]
+	if not _switch:
+		$SpritePivot/Sprite/Outline.self_modulate = GameManager.recolor.palettes["grays"][4]
