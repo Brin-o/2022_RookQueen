@@ -100,7 +100,7 @@ func push(from : BasePiece, direction : Vector2):
 		being_pushed = false
 		return true
 	
-	elif boardScene.get_tile(pushed_to).contains_enemy():
+	elif boardScene.get_tile(pushed_to).contains != null:
 		being_pushed_internal = true
 		move_only_visual(pushed_to)
 		yield(self, "finished_internal_push")
