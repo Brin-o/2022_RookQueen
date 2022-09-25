@@ -87,13 +87,11 @@ func push(from : BasePiece, direction : Vector2):
 	#print("Pushing ",self, " from ", current_tile, " to ", pushed_to)
 	being_pushed = true
 	
-	if not boardScene.is_inbounds(pushed_to):
-		die()
-		being_pushed = false
-		return false
-	
-	elif boardScene.get_tile(pushed_to).type == "C":
-		die()
+	if not boardScene.is_inbounds(pushed_to) or boardScene.get_tile(pushed_to).type == "C":
+		yield(get_tree().create_timer(0.01), "timeout")
+		emit_signal("finished_push")
+		boardScene.remove_from_enemies(self)
+		queue_free()
 		being_pushed = false
 		return false
 
@@ -182,6 +180,7 @@ func move_only_logic(var pos : Vector2):
 	boardScene.set_tile_piece(current_tile, null)
 	current_tile = pos
 	boardScene.set_tile_piece(current_tile, self)
+
 
 # ANIMATIONS
 # Animation Vars
