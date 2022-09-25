@@ -8,9 +8,9 @@ todo:
 - spike tiles DONE
 - key/door tile
 - end of level tiles
-- level swapping
+- level swapping DONEish
 - piece swapping between level
 - display which tiles the bishop will attack
 -- bishop should attack in a + pattern instead of X
 - pawn upgrade to random piece after reaching the end
-- 
+- timer between player move and enemy move
