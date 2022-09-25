@@ -13,6 +13,10 @@ func can_move_to():
 		while boardScene.is_steppable(next_tile):
 			if next_tile != current_tile:
 				tiles.push_back(next_tile)
+
+			if boardScene.get_tile(next_tile).contains != null:
+				if boardScene.get_tile(next_tile).contains != self and boardScene.get_tile(next_tile).contains_ally(type):
+					tiles.remove(len(tiles)-1)
 			if boardScene.get_tile(next_tile).contains_opponent(type):
 				break
 			next_tile += dir
@@ -38,7 +42,6 @@ func move_to(var pos : Vector2):
 			if not pushback:
 				.move_only_logic(pos)
 			attacking = false
-			print("Next turn from ROOK")
 			GameManager.next_turn()
 				
 	else:
