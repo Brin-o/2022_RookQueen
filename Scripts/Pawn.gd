@@ -27,11 +27,19 @@ func move_to(var pos : Vector2):
         var damage : int = round(rand_range(min_damage, max_damage))
         var killed = boardScene.get_tile(pos).contains.take_damage(damage)
         if killed:
-            .move_to(pos)
+            move_no_turn(pos)
+            boardScene.check_promote(self)
+            if type == "Player":
+                yield(self, "finished_movement")
+                GameManager.next_turn()
         else:
             .attack(boardScene.board_position(current_tile), attack_position)
             
     else:
-        .move_to(pos)
+        move_no_turn(pos)
+        boardScene.check_promote(self)
+        if type == "Player":
+            yield(self, "finished_movement")
+            GameManager.next_turn()
 
     #emit_signal("finished_movement")

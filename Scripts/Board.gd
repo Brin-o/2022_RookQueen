@@ -4,7 +4,6 @@ class_name Board
 
 var board : Array
 var offset
-export var dimension = 1
 var res = 216
 export (PackedScene) var tile_scene
 
@@ -122,3 +121,29 @@ func set_selectable_outline(var pos : Vector2, should_show : bool):
 	var tile = get_tile(pos)
 	tile.get_node("Selection/Attack").visible = should_show and tile.contains_enemy()
 	tile.get_node("Selection/Move").visible = should_show and not tile.contains_enemy()
+
+func is_pawn_on_edge(piece):
+	var t = piece.current_tile
+	var type = piece.type
+
+	match(type):
+		"Player":
+			return t.x == 0
+		"Enemy":
+			return t.x == len(board)-1
+
+func check_promote(piece):
+	if piece.type == "Enemy" and is_pawn_on_edge(piece):
+		promote(piece)
+		GameManager.next_turn()
+
+func promote(piece):
+	var tile = piece.current_tile 
+	remove_from_enemies(piece)
+	get_tile(tile).contains = null
+	piece.queue_free()
+
+	var possibilities = ["H", "B", "R"]
+	var new_type = possibilities[randi() % possibilities.size()]
+	spawn_piece(new_type, tile)
+

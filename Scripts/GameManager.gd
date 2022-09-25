@@ -96,7 +96,6 @@ func show_tiles(should_show):
 	for tile_pos in tiles:
 		board.set_selectable_outline(tile_pos, should_show)
 
-
 func change_level(_num):
 	player_hp = player.hp
 	print("going to level", _num)
