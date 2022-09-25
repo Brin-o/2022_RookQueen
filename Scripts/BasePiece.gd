@@ -65,6 +65,7 @@ func take_damage(damage : int):
 
 func die():
 	boardScene.remove_from_enemies(self)
+	boardScene.get_tile(current_tile).contains = null
 	queue_free()
 
 func do_random_move():
