@@ -16,7 +16,7 @@ min_damage = 3
 max_damage = 6
 
 [node name="SpritePivot" type="Node2D" parent="."]
-position = Vector2( 0, 8 )
+position = Vector2( 0.5, 8 )
 script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="SpritePivot"]
@@ -26,7 +26,7 @@ texture = ExtResource( 1 )
 offset = Vector2( 38, 13 )
 
 [node name="Outline" type="Sprite" parent="SpritePivot/Sprite"]
-self_modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
+self_modulate = Color( 0.38, 0.38, 0.38, 1 )
 position = Vector2( 38, 13 )
 texture = ExtResource( 3 )
 

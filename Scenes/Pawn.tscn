@@ -22,7 +22,7 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 
 [node name="Outline" type="Sprite" parent="SpritePivot/Sprite"]
-self_modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
+self_modulate = Color( 0.38, 0.38, 0.38, 1 )
 texture = ExtResource( 3 )
 
 [node name="UnitHP" parent="." instance=ExtResource( 4 )]
