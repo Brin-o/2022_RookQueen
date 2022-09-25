@@ -47,6 +47,7 @@ func next_turn():
 	if turn == "Player":
 		print("Player finished turn. Enemy goes.")
 		turn = "Enemy"
+		yield(get_tree().create_timer(rand_range(0.3,0.6)), "timeout")
 		enemy_turn()
 	else:
 		turn = "Player"
@@ -56,15 +57,32 @@ func next_turn():
 
 func enemy_turn():
 	var i = 0
+	var any_attacked = false
+
+	#way more cumbersome than it should be but works for now
 	if len(board.enemies) > 0:
-		next_piece_idx = clamp(next_piece_idx, 0, len(board.enemies))
-		for enemy in board.enemies:
-			if not one_at_a_time or one_at_a_time and i == next_piece_idx:
-				enemy.do_random_move()
-				yield(enemy, "finished_movement")
-			i+=1
-		next_piece_idx += 1
-		next_piece_idx %= len(board.enemies)
+		next_piece_idx = clamp(next_piece_idx, 0, len(board.enemies)-1)
+		while not any_attacked:
+			i=0
+			for enemy in board.enemies:
+				if not one_at_a_time:
+					if len(enemy.can_move_to()) <= 0:
+						enemy.do_random_move()
+						yield(enemy, "finished_movement")
+						any_attacked = true
+				else:
+					if i == next_piece_idx:
+						if len(enemy.can_move_to()) <= 0:
+							print(self, " cant do random move")
+						elif not any_attacked:
+							enemy.do_random_move()
+							yield(enemy, "finished_movement")
+							any_attacked = true
+						next_piece_idx += 1
+						next_piece_idx %= len(board.enemies)
+						show_next_attack_tiles(board.enemies[next_piece_idx])
+						break
+				i+=1
 	else:
 		change_level(level.num + 1)
 	next_turn()
@@ -74,7 +92,6 @@ func show_tiles(should_show):
 	for tile_pos in tiles:
 		board.set_selectable_outline(tile_pos, should_show)
 
-
 func change_level(_num):
 	player_hp = player.hp
 	print("going to level", _num)
@@ -82,3 +99,9 @@ func change_level(_num):
 	main_scene.add_child(levels[_num-1].instance())
 	player_hp += 2
 	
+func show_next_attack():
+	board.enemies[next_piece_idx].set_active_piece(true)
+
+func show_next_attack_tiles(piece):
+	for enemy in board.enemies:
+		enemy.set_active_piece(enemy == piece)
