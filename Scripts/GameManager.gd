@@ -47,6 +47,7 @@ func next_turn():
 	if turn == "Player":
 		print("Player finished turn. Enemy goes.")
 		turn = "Enemy"
+		yield(get_tree().create_timer(rand_range(0.3,0.6)), "timeout")
 		enemy_turn()
 	else:
 		turn = "Player"
