@@ -3,7 +3,7 @@ bugs:
 - [ ] bishop does not move on his turn
 - [x] rook richoche 
 - [ ] spike2 in spikes needs to be set to z index 0 if noone is currently on the tile
-- [ ] in some weird secnario bishop 
+- [ ] in some weird secnario bishop thinks he can not move? usually seems to happen after an allied bishop has been knocked out
 
 todo:
 - [x] spike tiles
@@ -16,3 +16,4 @@ todo:
 - [ ] pawn upgrade to random piece after reaching the end
 - [ ] timer between player move and enemy move
 - [ ] in base piece call set_active_piece(true) if this is the next piece that will perform a turn
+- [ ] solution for horse/horse? start spawning spikes on the outer edges of the map basically doing a bomber man style thing?
