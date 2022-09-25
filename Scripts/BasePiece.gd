@@ -68,15 +68,18 @@ func do_random_move():
 
 func push(from : BasePiece, direction : Vector2):
 	var pushed_to = current_tile + direction
+	print("Pushing ",self, " from ", current_tile, " to ", pushed_to)
 	being_pushed = true
 	
 	if not boardScene.is_inbounds(pushed_to):
 		die()
-		return true
+		being_pushed = false
+		return false
 	
 	elif boardScene.get_tile(pushed_to).type == "C":
 		die()
-		return true
+		being_pushed = false
+		return false
 
 	elif boardScene.get_tile(pushed_to).type == "W":
 		being_pushed_internal = true
@@ -84,24 +87,29 @@ func push(from : BasePiece, direction : Vector2):
 		yield(self, "finished_internal_push")
 		anim_start_movement(boardScene.board_position(pushed_to), boardScene.board_position(current_tile))
 		yield(self, "finished_internal_push")
+		being_pushed_internal = false
 		from.push(self, -direction)
-		return false
+		yield(from, "finished_push")
+		emit_signal("finished_push")
+		being_pushed = false
+		return true
 	
 	elif boardScene.get_tile(pushed_to).contains_enemy():
-		var can_go = boardScene.get_tile(pushed_to).contains.push(self, direction)
-		if can_go:
-			move_no_turn(pushed_to)
-			yield(self, "finished_push")
-			being_pushed = false
-		return true
+		boardScene.get_tile(pushed_to).contains.push(self, direction)
+		move_no_turn(pushed_to)
+		yield(self, "finished_push")
+		being_pushed = false
+		return false
 		#apply hit damage?
 
 	else:
 		move_no_turn(pushed_to)
+		yield(self, "finished_push")
 		being_pushed = false
 		return true
 
 func move_no_turn(var pos : Vector2):
+	print(self, "Moving to ",pos)
 	boardScene.set_tile_piece(current_tile, null)
 	current_tile = pos
 	var new_pos = boardScene.board_position(pos)
@@ -116,7 +124,6 @@ func move_only_logic(var pos : Vector2):
 	boardScene.set_tile_piece(current_tile, null)
 	current_tile = pos
 	boardScene.set_tile_piece(current_tile, self)
-	print("ONLY LOGIC")
 
 
 # ANIMATIONS
@@ -157,14 +164,17 @@ func anim_movement():
 	moving = position.x != _x or position.y != _y
 
 	if not moving and _previous_moving:
-
 		if being_pushed and not being_pushed_internal:
+			print("Emitting finished push from ", self)
 			emit_signal("finished_push")
 		elif being_pushed and being_pushed_internal:
+			print("Emitting finished push internal from ", self)
 			emit_signal("finished_internal_push")
 		elif attacking:
+			print("Emitting finished internal movement ", self)
 			emit_signal("finished_internal_movement")
 		else:
+			print("Emitting finished movement ", self)
 			emit_signal("finished_movement")
 
 	position.x = _x

@@ -32,9 +32,12 @@ func move_to(var pos : Vector2):
 			attacking = true
 			.move_only_visual(pos)
 			yield(self, "finished_internal_movement")
-			enemy.push(self, (pos - current_tile).normalized())
+			var pushed_back = enemy.push(self, (pos - current_tile).normalized())
 			yield(enemy, "finished_push")
-			.move_only_logic(pos)
+			print(enemy.being_pushed)
+			print(enemy.being_pushed_internal)
+			if not pushed_back:
+				.move_only_logic(pos)
 			attacking = false
 			GameManager.next_turn()
 				
