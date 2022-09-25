@@ -35,6 +35,7 @@ func _process(delta):
 	pass
 
 func _set_sprites():
+	
 	if color == "White":
 		$Sprite.modulate = GameManager.recolor.colTileWhite;
 	elif color == "Black":
@@ -42,6 +43,8 @@ func _set_sprites():
 	else:
 		printerr("Wrong color in tile")
 
+	if type == "S":
+		spike_setcolor()
 	$Sprite/ChasmSprite.visible = type == "C"
 	$Sprite/FloorSprite.visible = type == "."
 	$Sprite/WallSprite.visible = type == "W"
@@ -101,3 +104,23 @@ func end_turn_effect():
 			print(contains, "on location ", pos, " takes 1 dmg from spikes")
 			contains.take_damage(1)
 	pass
+
+
+func spike_setcolor():
+	$Sprite.modulate = Color(1,1,1)
+	var target_c
+	if color == "White":
+		target_c = GameManager.recolor.colTileWhite;
+	elif color == "Black":
+		target_c = GameManager.recolor.colTileBlack;
+	
+	$Sprite/SpikesSprite/FloorSprite.self_modulate = target_c
+	$Sprite/SpikesSprite/Spike1/Spike.self_modulate = GameManager.recolor.palettes["grays"][3]
+	$Sprite/SpikesSprite/Spike1/SpikeOutline.self_modulate = GameManager.recolor.palettes["grays"][7]
+	$Sprite/SpikesSprite/Spike2/Spike.self_modulate = GameManager.recolor.palettes["grays"][3]
+	$Sprite/SpikesSprite/Spike2/SpikeOutline.self_modulate = GameManager.recolor.palettes["grays"][7]
+
+	pass
+
+func _on_KinematicBody2D_mouse_entered():
+	pass # Replace with function body.

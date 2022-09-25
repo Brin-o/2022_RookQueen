@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/BaseTile.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/KeySprite.png" type="Texture" id=2]
@@ -7,9 +7,17 @@
 [ext_resource path="res://Sprites/Tiles/border_edge.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/IceSprite.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/DoorSprite.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/SpikesSprite.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Partial/SpikeAnimation.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/Tiles/tile_f.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/selection_border.png" type="Texture" id=10]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
@@ -94,11 +102,12 @@ flip_h = true
 flip_v = true
 
 [node name="Sprite" type="Node2D" parent="."]
+modulate = Color( 0.51, 0.51, 0.51, 1 )
 
 [node name="ChasmSprite" type="Sprite" parent="Sprite"]
+visible = false
 
 [node name="FloorSprite" type="Sprite" parent="Sprite"]
-visible = false
 texture = ExtResource( 9 )
 
 [node name="WallSprite" type="Sprite" parent="Sprite"]
@@ -109,9 +118,24 @@ texture = ExtResource( 3 )
 visible = false
 texture = ExtResource( 6 )
 
-[node name="SpikesSprite" type="Sprite" parent="Sprite"]
-visible = false
-texture = ExtResource( 8 )
+[node name="SpikesSprite" type="AnimatedSprite" parent="Sprite"]
+frames = SubResource( 2 )
+
+[node name="FloorSprite" type="Sprite" parent="Sprite/SpikesSprite"]
+texture = ExtResource( 9 )
+
+[node name="Spike1" parent="Sprite/SpikesSprite" instance=ExtResource( 8 )]
+position = Vector2( -24, -12 )
+
+[node name="Spike2" parent="Sprite/SpikesSprite" instance=ExtResource( 8 )]
+position = Vector2( -28, -19 )
+
+[node name="Spike" parent="Sprite/SpikesSprite/Spike2" index="0"]
+frame = 1
+
+[node name="SpikeOutline" parent="Sprite/SpikesSprite/Spike2" index="1"]
+modulate = Color( 1, 1, 1, 1 )
+frame = 1
 
 [node name="DoorSprite" type="Sprite" parent="Sprite"]
 visible = false
@@ -141,3 +165,6 @@ visible = false
 shape = SubResource( 1 )
 
 [connection signal="input_event" from="KinematicBody2D" to="." method="_on_KinematicBody2D_input_event"]
+[connection signal="mouse_entered" from="KinematicBody2D" to="." method="_on_KinematicBody2D_mouse_entered"]
+
+[editable path="Sprite/SpikesSprite/Spike2"]
