@@ -50,6 +50,7 @@ func next_turn():
 		enemy_turn()
 	else:
 		turn = "Player"
+		get_tree().call_group("tile", "end_turn_effect")
 		print("Enemy finished turn. Player goes.")
 
 

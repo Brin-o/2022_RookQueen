@@ -14,7 +14,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
 
-[node name="Tile" type="Node2D"]
+[node name="Tile" type="Node2D" groups=["tile"]]
 position = Vector2( 0, 3 )
 script = ExtResource( 1 )
 __meta__ = {

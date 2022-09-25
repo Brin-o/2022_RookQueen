@@ -94,6 +94,7 @@ func corner_border_generation():
 
 func end_turn_effect():
 	if type=="S":
-		if !contains:
+		if is_instance_valid(contains):
+			print(contains, "on location ", pos, " takes 1 dmg from spikes")
 			contains.take_damage(1)
 	pass
