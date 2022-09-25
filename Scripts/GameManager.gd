@@ -56,15 +56,37 @@ func next_turn():
 
 func enemy_turn():
 	var i = 0
+	var any_attacked = false
+
+	#way more cumbersome than it should be but works for now
 	if len(board.enemies) > 0:
-		next_piece_idx = clamp(next_piece_idx, 0, len(board.enemies))
-		for enemy in board.enemies:
-			if not one_at_a_time or one_at_a_time and i == next_piece_idx:
-				enemy.do_random_move()
-				yield(enemy, "finished_movement")
-			i+=1
-		next_piece_idx += 1
-		next_piece_idx %= len(board.enemies)
+		next_piece_idx = clamp(next_piece_idx, 0, len(board.enemies)-1)
+		while not any_attacked:
+			for enemy in board.enemies:
+				if not one_at_a_time:
+					if len(enemy.can_move_to()) <= 0:
+						enemy.do_random_move()
+						yield(enemy, "finished_movement")
+						any_attacked = true
+				else:
+					if i == next_piece_idx:
+						if len(enemy.can_move_to()) <= 0:
+							print(self, " cant do random move")
+							i+=1
+							i %= len(board.enemies)
+						elif not any_attacked:
+							print("Doing random move")
+							enemy.do_random_move()
+							yield(enemy, "finished_movement")
+							any_attacked = true
+						
+						next_piece_idx += 1
+						next_piece_idx %= len(board.enemies)
+
+				i+=1
+				i %= len(board.enemies)
+			next_piece_idx += 1
+			next_piece_idx %= len(board.enemies)
 	else:
 		change_level(level.num + 1)
 	next_turn()
