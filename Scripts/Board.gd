@@ -12,9 +12,10 @@ export(PackedScene) var bishop
 export(PackedScene) var horse
 export(PackedScene) var queen
 export(PackedScene) var rook
+export(PackedScene) var king
 
 
-var enemies_type = ["P", "p", "B", "b", "H", "h", "Q", "q", "R", "r"]
+var enemies_type = ["P", "p", "B", "b", "H", "h", "Q", "q", "R", "r", "K", "k"]
 var enemies : Array = []
 
 # Called when the node enters the scene tree for the first time.
@@ -105,6 +106,8 @@ func spawn_piece(tile : String, pos : Vector2):
 			piece = queen.instance()
 		"R","r":
 			piece = rook.instance()
+		"K","k":
+			piece = king.instance()
 		_:
 			printerr("Wrong enemy character")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Board.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Tile.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Bishop.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Pawn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Rook.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/King.tscn" type="PackedScene" id=8]
 
 [node name="Board" type="Node"]
 script = ExtResource( 1 )
@@ -16,3 +17,4 @@ bishop = ExtResource( 5 )
 horse = ExtResource( 4 )
 queen = ExtResource( 3 )
 rook = ExtResource( 7 )
+king = ExtResource( 8 )
