@@ -32,6 +32,11 @@ func _ready():
 
 
 func _process(delta):
+	if type == "D":
+		if len(GameManager.board.enemies)>0:
+			visible = false
+		else:
+			visible = true
 	pass
 
 func _set_sprites():
@@ -45,6 +50,9 @@ func _set_sprites():
 
 	if type == "S":
 		spike_setcolor()
+	if type == "W":
+		$Sprite.modulate = GameManager.recolor.palettes["grays"][1]
+
 	$Sprite/ChasmSprite.visible = type == "C"
 	$Sprite/FloorSprite.visible = type == "."
 	$Sprite/WallSprite.visible = type == "W"
@@ -83,6 +91,11 @@ func _on_KinematicBody2D_input_event(_viewport:Node, event:InputEvent, _shape_id
 
 
 func corner_border_generation():
+	if type == "D":
+		$EdgeBorderCorners.visible = false
+		$BorderCorners.visible = false
+		return
+
 	if pos.y == GameManager.board.board.size() -1:
 		$EdgeBorderCorners/TopRight.visible = true
 		$EdgeBorderCorners/BottomRight.visible = true

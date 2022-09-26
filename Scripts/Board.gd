@@ -59,8 +59,8 @@ func generate_board():
 			column += 1
 		row += 1
 		column = 0
-
-	enemies[0].set_active_piece(true)
+	if len(enemies)>0:
+		enemies[0].set_active_piece(true)
 
 func get_tile(pos):
 	assert(is_inbounds(pos), "You were trying to access an out of bounds position")
