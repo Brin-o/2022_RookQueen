@@ -153,3 +153,22 @@ func promote(piece):
 	var new_type = possibilities[randi() % possibilities.size()]
 	spawn_piece(new_type, tile)
 
+func get_closest_tiles_to_player(tiles):
+	var player_tile = GameManager.player.current_tile
+	var closest : Array = []
+	var min_dis = 100
+
+	for tile in tiles:
+		var x_dis = abs(player_tile.x-tile.x)
+		var y_dis = abs(player_tile.y-tile.y)
+
+		var dis = max(x_dis, y_dis)
+
+		if dis < min_dis:
+			min_dis = dis
+			closest.clear()
+			closest.append(tile)
+		elif dis == min_dis:
+			closest.append(tile)
+			
+	return closest

@@ -67,6 +67,9 @@ func is_walkable():
 func contains_enemy():
 	return contains != null and contains.type == "Enemy"
 
+func contains_player():
+	return contains != null and contains.type == "Player"
+
 func contains_opponent(var check_type):
 	var opponent = "Player" if check_type == "Enemy" else "Enemy"
 	return contains != null and contains.type == opponent

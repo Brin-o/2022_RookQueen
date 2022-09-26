@@ -15,6 +15,9 @@ func can_move_to():
 	for dir in directions:
 		next_tile = current_tile
 		while boardScene.is_steppable(next_tile):
+			if type == "Enemy" and boardScene.get_tile(next_tile).contains_player():
+				return [next_tile]
+
 			if next_tile != current_tile:
 				tiles.push_back(next_tile)
 
@@ -24,7 +27,10 @@ func can_move_to():
 			if boardScene.get_tile(next_tile).contains_opponent(type):
 				break
 			next_tile += dir
-
+	
+	if type == "Enemy":
+		tiles = boardScene.get_closest_tiles_to_player(tiles)
+	
 	return tiles
 
 func move_to(var pos : Vector2):
