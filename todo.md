@@ -3,8 +3,8 @@ todo:
 - [x] level swapping DONEish
 - [ ] piece swapping between level
 - [x] bishop, make it so a regular attack is also possible
-- [ ] bishop display tiles that will be attacked on move
-- [ ] display hovered tiles
+- [x] bishop display tiles that will be attacked on move
+- [x] display hovered tiles
 - [x] bishop should attack in a + pattern instead of X
 - [x] pawn upgrade to random piece after reaching the end
 - [x] timer between player move and enemy move

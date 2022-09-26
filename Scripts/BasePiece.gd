@@ -24,6 +24,8 @@ var attacking : bool = false
 var being_pushed : bool = false
 var being_pushed_internal : bool = false
 
+onready var hp_popup = load("res://Scenes/Partial/HpPopup.tscn")
+
 func get_type():
 	return "BasePiece"
 
@@ -57,6 +59,9 @@ func _on_BasePiece_finished_movement():
 	pass # Replace with function body.
 
 func take_damage(damage : int):
+	var popup = hp_popup.instance()
+	add_child(popup)
+	popup.hp_pop(self, damage)
 	hp -= damage
 	if hp <= 0:
 		die()

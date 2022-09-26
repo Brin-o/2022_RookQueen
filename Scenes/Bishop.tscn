@@ -8,10 +8,7 @@
 [node name="Bishop" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
-hp = null
 min_damage = 2
-max_damage = null
-move_timer = null
 
 [node name="SpritePivot" type="Node2D" parent="."]
 position = Vector2( 0, 7 )
@@ -25,6 +22,6 @@ self_modulate = Color( 0.38, 0.38, 0.38, 1 )
 texture = ExtResource( 3 )
 
 [node name="UnitHP" parent="." instance=ExtResource( 4 )]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -4 )
 
 [connection signal="finished_movement" from="." to="." method="_on_BasePiece_finished_movement"]
