@@ -21,3 +21,5 @@ func default_txt():
 	p_name = DEFAULT_N
 	p_description = DEFAULT_D
 
+func flavour_text(t):
+	$StoryText.text = t
