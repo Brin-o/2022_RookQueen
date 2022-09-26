@@ -50,18 +50,19 @@ func move_to(var pos : Vector2):
 	else: #AOE
 		attacking = true
 		.move_no_turn(pos)
+		yield(self, "finished_internal_movement")
 		for dir in directions:
 			var attack_pos = pos + dir
 			if boardScene.is_inbounds(attack_pos):
 				if boardScene.get_tile(attack_pos).contains_opponent(type):
 					var damage : int = round(rand_range(min_damage, max_damage))
 					var killed = boardScene.get_tile(attack_pos).contains.take_damage(damage)
-					yield(self, "finished_internal_movement")
-					$SpritePivot.x_scale = 2
-					yield(get_tree().create_timer(0.5), "timeout")
+					print("Checking killed")
+					#$SpritePivot.x_scale = 2
+					#yield(get_tree().create_timer(0.5), "timeout")
 					attacking = false
-					emit_signal("finished_movement")
-		
+		emit_signal("finished_movement")			
+		attacking = false
 		if type == "Player":
 			#yield(self, "finished_movement")
 			GameManager.next_turn()
