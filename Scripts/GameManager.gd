@@ -12,7 +12,7 @@ var level : LevelInfo
 var camera
 var ui
 var next_player_piece = "p"
-var skip_piece_pick_in_levels = [0,1,2,3]
+var skip_piece_pick_in_levels = [0,1,2,3,11]
 var lost = false
 
 export var one_at_a_time : bool = true
@@ -29,7 +29,8 @@ var levels : Array = [
 	preload("res://Levels/Level7.tscn"), 
 	preload("res://Levels/Level8.tscn"), 
 	preload("res://Levels/Level9.tscn"),
-	preload("res://Levels/Level10.tscn")] 
+	preload("res://Levels/Level10.tscn"),
+	preload("res://Levels/Level11.tscn")] 
 
 var player_hp = 2
 
@@ -40,13 +41,16 @@ func _ready():
 
 
 func _process(delta):
+	"""
 	if Input.is_action_just_released("ui_left"):
 		change_level(level.num-1)
 		pass
 	if Input.is_action_just_pressed("ui_right"):
 		change_level(level.num+1)
 		pass
+	"""
 	pass
+	
 
 func _input(event):
 	if(event is InputEventMouseButton and event.is_pressed() and not event.is_echo()):
@@ -96,7 +100,7 @@ func enemy_turn():
 						show_next_attack_tiles(board.enemies[next_piece_idx])
 						break
 				i+=1
-	else:
+	elif level.num < 11:
 		change_level(level.num + 1)
 	next_turn()
 
@@ -107,7 +111,7 @@ func show_tiles(should_show):
 
 
 
-var flavourText =["lvl1", "lvl2", "lvl3", "we stormed past the knights", "their towers did not protect them from us", "the four bishops tried to oppose us", "even some of our own betrayed us", "but we prevailed", "it was the king and his bodyguards", "not even the queen could stop us"]
+var flavourText =["lvl1", "lvl2", "lvl3", "we stormed past the knights", "their towers did not protect them from us", "the four bishops tried to oppose us", "even some of our own betrayed us", "but we prevailed", "it was the king and his bodyguards", "not even the queen could stop us", "thank you for playing!"]
 func change_level(_num):
 	yield(get_tree().create_timer(0.1), "timeout")
 	if player != null and player.hp != null:
@@ -123,10 +127,12 @@ func change_level(_num):
 		main_scene.get_node("UI/Selection").visible = false
 	
 	board.generate_enemies()
-
 	camera.target_z = rand_range(0.85,1.15)
 	camera.target_rot = rand_range(-3,3)
-	#board.set_visible_enemies(false)
+	
+	print(_num)
+	if _num == 11:
+		ui.visible = false
 	
 func show_next_attack():
 	board.enemies[next_piece_idx].set_active_piece(true)

@@ -5,6 +5,9 @@ class_name Queen
 func get_type():
 	return "Queen"
 
+var base_min_dmg = min_damage
+var base_max_dmg = max_damage
+
 export var counter_increase : int = 1
 var counter : int = 0
 
@@ -40,7 +43,7 @@ func move_to(var pos : Vector2):
 	counter+=1
 	if boardScene.get_tile(pos).contains_opponent(type):
 		var attack_position = boardScene.board_position(pos)
-		var damage : int = round(rand_range(min_damage + counter*counter_increase, max_damage + counter*counter_increase))
+		var damage : int = round(rand_range(min_damage, max_damage))
 		var killed = boardScene.get_tile(pos).contains.take_damage(damage)
 		if killed:
 			.move_to(pos)
@@ -49,3 +52,5 @@ func move_to(var pos : Vector2):
 			counter+=1
 	else:
 		.move_to(pos)
+	min_damage = base_min_dmg + counter*counter_increase
+	max_damage = base_max_dmg + counter*counter_increase
