@@ -9,6 +9,7 @@ var recolor : ColorManager
 var player
 var level : LevelInfo
 var camera
+var ui
 var next_player_piece = "p"
 
 export var one_at_a_time : bool = true
@@ -108,6 +109,9 @@ func change_level(_num):
 	yield(self, "selected_new_piece")
 	main_scene.get_node("UI/Selection").visible = false
 	board.generate_enemies()
+
+	camera.target_z = rand_range(0.8,1.2)
+	camera.target_rot = rand_range(-3,3)
 	#board.set_visible_enemies(false)
 	
 func show_next_attack():
@@ -152,7 +156,14 @@ func upgrade_piece(_piece : String, bouns_hp : int):
 
 
 
-
-func lose():
-
-	yield(get_tree().create_timer(0.3), "timeout")
+var lose_msg = ["""you have 
+failed""","""your attempts
+are futile""",
+"""the monarch
+prevails""", """the rebelion
+is crushed""" ]
+func lose_animation():
+	camera.lose()
+	var t = Util.choose(lose_msg)
+	for l in ui.get_node("LoseScreen").get_children():
+		l.text = t
