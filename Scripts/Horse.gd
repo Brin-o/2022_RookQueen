@@ -5,37 +5,25 @@ class_name Horse
 func can_move_to():
 	var tiles : Array = []
 
-	var pos = Vector2(current_tile.x-1, current_tile.y-2)
-	if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
-		tiles.push_back(pos)
+	var possible_pos = [
+	Vector2(current_tile.x-1, current_tile.y-2),
+	Vector2(current_tile.x-2, current_tile.y-1),
+	Vector2(current_tile.x-1, current_tile.y+2),
+	Vector2(current_tile.x-2, current_tile.y+1),
+	Vector2(current_tile.x+1, current_tile.y-2),
+	Vector2(current_tile.x+2, current_tile.y-1),
+	Vector2(current_tile.x+1, current_tile.y+2),
+	Vector2(current_tile.x+2, current_tile.y+1)
+	]
 
-	pos = Vector2(current_tile.x-2, current_tile.y-1)
-	if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
-		tiles.push_back(pos)
+	for pos in possible_pos:
+		if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
+			tiles.push_back(pos)
+		if boardScene.get_tile(pos).contains_player and type == "Enemy":
+			return [pos]
 
-	pos = Vector2(current_tile.x-1, current_tile.y+2)
-	if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
-		tiles.push_back(pos)
-
-	pos = Vector2(current_tile.x-2, current_tile.y+1)
-	if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
-		tiles.push_back(pos)
-
-	pos = Vector2(current_tile.x+1, current_tile.y-2)
-	if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
-		tiles.push_back(pos)
-
-	pos = Vector2(current_tile.x+2, current_tile.y-1)
-	if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
-		tiles.push_back(pos)
-
-	pos = Vector2(current_tile.x+1, current_tile.y+2)
-	if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
-		tiles.push_back(pos)
-
-	pos = Vector2(current_tile.x+2, current_tile.y+1)
-	if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
-		tiles.push_back(pos)
+	if type == "Enemy":
+		tiles = boardScene.get_closest_tiles_to_player(tiles)
 
 	return tiles
 

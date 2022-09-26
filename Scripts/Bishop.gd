@@ -18,6 +18,9 @@ func can_move_to():
 				break
 			next_tile += dir
 
+	if type == "Enemy":
+		tiles = boardScene.get_closest_tiles_to_player(tiles)
+
 	return tiles
 
 
