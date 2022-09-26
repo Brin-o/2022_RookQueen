@@ -13,10 +13,13 @@ var hovered
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 func _process(delta):
+	if GameManager.next_player_piece == map_piece:
+		visible = false
+
 	if(hovered):
 		rect_position.y = lerp(rect_position.y, -10, delta*10)
 	else:
