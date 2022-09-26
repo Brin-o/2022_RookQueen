@@ -19,7 +19,7 @@ func can_move_to():
 	for pos in possible_pos:
 		if boardScene.is_steppable(pos) and not boardScene.get_tile(pos).contains_ally(type):
 			tiles.push_back(pos)
-		if boardScene.get_tile(pos).contains_player and type == "Enemy":
+		if boardScene.is_steppable(pos) and boardScene.get_tile(pos).contains_player() and type == "Enemy":
 			return [pos]
 
 	if type == "Enemy":
