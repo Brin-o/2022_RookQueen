@@ -6,6 +6,7 @@ var board : Board
 var recolor : ColorManager
 var player
 var level : LevelInfo
+var next_player_piece = "p"
 
 export var one_at_a_time : bool = true
 var next_piece_idx : int = 0
