@@ -8,13 +8,15 @@ extends Sprite
 onready var cursorpos = $CursorSprite.position
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	position = get_viewport().get_mouse_position()
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position = get_viewport().get_mouse_position()
-	if Input.is_action_pressed("mouseL"):
-		$CursorSprite.position = $Shadow.position
-	else:
-		$CursorSprite.position = cursorpos
+	# if Input.is_action_pressed("mouseL"):
+	# 	$CursorSprite.position = $Shadow.position
+	# else:
+	# 	$CursorSprite.position = cursorpos
