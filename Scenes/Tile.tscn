@@ -129,6 +129,7 @@ texture = ExtResource( 9 )
 
 [node name="Spike2" parent="Sprite/SpikesSprite" instance=ExtResource( 8 )]
 position = Vector2( -24, -10.5 )
+z_index = 1
 
 [node name="SpikeOutline" parent="Sprite/SpikesSprite/Spike2" index="1"]
 visible = false
