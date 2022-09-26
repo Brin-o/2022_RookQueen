@@ -84,13 +84,17 @@ func _on_KinematicBody2D_input_event(_viewport:Node, event:InputEvent, _shape_id
 	if event is InputEventMouseButton and event.pressed:
 
 		if contains != null and contains.type != "Enemy":
-			GameManager.selected_piece = contains
-			GameManager.show_tiles(true)
+			if contains == self:
+				GameManager.show_tiles(false)
+				GameManager.selected_piece = null
+			else:
+				GameManager.selected_piece = contains
+				GameManager.show_tiles(true)
 		elif GameManager.selected_piece != null:
 			if pos in GameManager.selected_piece.can_move_to():
 				GameManager.show_tiles(false)
 				GameManager.selected_piece.move_to(pos)
-			GameManager.selected_piece = null
+				GameManager.selected_piece = null
 
 
 func corner_border_generation():
