@@ -105,6 +105,9 @@ func show_tiles(should_show):
 	for tile_pos in tiles:
 		board.set_selectable_outline(tile_pos, should_show)
 
+
+
+var flavourText =["lvl1", "lvl2", "lvl3", "we stormed past the knights", "their towers did not protect them from us", "the four bishops tried to oppose us", "even some of our own betrayed us", "but we prevailed", "it was the king and his bodyguards", "not even the queen could stop us"]
 func change_level(_num):
 	yield(get_tree().create_timer(0.1), "timeout")
 	if player != null and player.hp != null:
@@ -115,6 +118,7 @@ func change_level(_num):
 	if not _num in skip_piece_pick_in_levels:
 		print(level.num)
 		main_scene.get_node("UI/Selection").visible = true
+		main_scene.get_node("UI/Selection").flavour_text(flavourText[_num-1])
 		yield(self, "selected_new_piece")
 		main_scene.get_node("UI/Selection").visible = false
 	
