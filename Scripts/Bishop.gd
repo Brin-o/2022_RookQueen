@@ -2,6 +2,9 @@ extends BasePiece
 
 class_name Bishop
 
+func get_type():
+	return "Bishop"
+
 func can_move_to():
 	var tiles : Array = []
 	var opponent_tiles = []

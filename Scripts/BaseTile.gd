@@ -142,6 +142,7 @@ func spike_setcolor():
 	pass
 
 func _on_KinematicBody2D_mouse_entered():
+	
 	if $Selection/Attack.visible:
 		$Selection/AttackHover.visible = true;
 		$Selection/Attack.scale = Vector2.ONE*1.25
@@ -149,10 +150,22 @@ func _on_KinematicBody2D_mouse_entered():
 		$Selection/MoveHover.visible = true;
 		$Selection/Move.scale = Vector2.ONE*1.25
 
-	
+		if GameManager.selected_piece != null and GameManager.selected_piece.get_type() == "Bishop":
+			GameManager.show_bishop_attack_tiles(pos)
 
 
 func _on_KinematicBody2D_mouse_exited():
+	$Selection/Move.scale = Vector2.ONE
+	$Selection/Attack.scale = Vector2.ONE
+	$Selection/MoveHover.visible = false;
+	$Selection/AttackHover.visible = false;
+
+	if GameManager.selected_piece != null and GameManager.selected_piece.get_type() == "Bishop":
+		GameManager.hide_bishop_attack_tiles(pos)
+
+func clean_tile():
+	$Selection/Attack.visible = false
+	$Selection/Move.visible = false
 	$Selection/Move.scale = Vector2.ONE
 	$Selection/Attack.scale = Vector2.ONE
 	$Selection/MoveHover.visible = false;

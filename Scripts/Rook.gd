@@ -2,6 +2,9 @@ extends BasePiece
 
 class_name Rook
 
+func get_type():
+	return "Rook"
+
 func can_move_to():
 	var tiles : Array = []
 

@@ -2,6 +2,9 @@ extends BasePiece
 
 class_name Queen
 
+func get_type():
+	return "Queen"
+
 export var counter_increase : int = 2
 var counter : int = 0
 

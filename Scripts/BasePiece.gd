@@ -24,6 +24,8 @@ var attacking : bool = false
 var being_pushed : bool = false
 var being_pushed_internal : bool = false
 
+func get_type():
+	return "BasePiece"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

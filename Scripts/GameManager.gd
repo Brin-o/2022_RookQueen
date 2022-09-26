@@ -47,6 +47,7 @@ func next_turn():
 	if turn == "Player":
 		print("Player finished turn. Enemy goes.")
 		turn = "Enemy"
+		hide_all_tiles()
 		yield(get_tree().create_timer(rand_range(0.3,0.6)), "timeout")
 		enemy_turn()
 	else:
@@ -105,3 +106,32 @@ func show_next_attack():
 func show_next_attack_tiles(piece):
 	for enemy in board.enemies:
 		enemy.set_active_piece(enemy == piece)
+
+func show_bishop_attack_tiles(var pos):
+	var directions = [Vector2(0,-1), Vector2(0,1), Vector2(1,0), Vector2(-1,0)]
+
+	for dir in directions:
+		var attack_pos = pos + dir
+		if board.is_inbounds(attack_pos):
+			var t = board.get_tile(attack_pos)
+			t.get_node("Selection/Attack").visible = true
+
+func hide_bishop_attack_tiles(var pos):
+	var directions = [Vector2(0,-1), Vector2(0,1), Vector2(1,0), Vector2(-1,0)]
+
+	for dir in directions:
+		var attack_pos = pos + dir
+		if board.is_inbounds(attack_pos):
+			var t = board.get_tile(attack_pos)
+			t.get_node("Selection/Attack").visible = false
+			t.get_node("Selection/AttackHover").visible = false
+			t.get_node("Selection/Attack").scale = Vector2.ONE
+	
+
+func hide_all_tiles():
+	if board != null and board.board != null:
+		for tiles in board.board:
+			for tile in tiles:
+				tile.clean_tile()
+
+
