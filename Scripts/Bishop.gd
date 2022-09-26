@@ -4,6 +4,7 @@ class_name Bishop
 
 func can_move_to():
 	var tiles : Array = []
+	var opponent_tiles = []
 
 	var directions = [Vector2(-1,-1), Vector2(-1,1), Vector2(1,-1), Vector2(1,1)]
 	var next_tile = current_tile
@@ -14,9 +15,14 @@ func can_move_to():
 			if next_tile != current_tile:
 				tiles.push_back(next_tile)
 			if boardScene.get_tile(next_tile).contains != null and boardScene.get_tile(next_tile).contains != self:
+				if boardScene.get_tile(next_tile).contains_opponent(type):
+					opponent_tiles.push_back(next_tile)
 				tiles.remove(len(tiles)-1)
 				break
 			next_tile += dir
+
+	if len(tiles) == 0:
+		return opponent_tiles
 
 	if type == "Enemy":
 		tiles = boardScene.get_closest_tiles_to_player(tiles)
@@ -26,15 +32,26 @@ func can_move_to():
 
 func move_to(var pos : Vector2):
 	var directions = [Vector2(0,-1), Vector2(0,1), Vector2(1,0), Vector2(-1,0)]
-	.move_no_turn(pos)
 
-	for dir in directions:
-		var attack_pos = pos + dir
-		if boardScene.is_inbounds(attack_pos):
-			if boardScene.get_tile(attack_pos).contains_opponent(type):
-				var damage : int = round(rand_range(min_damage, max_damage))
-				var killed = boardScene.get_tile(attack_pos).contains.take_damage(damage)
-    
-	if type == "Player":
-		yield(self, "finished_movement")
-		GameManager.next_turn()
+	if boardScene.get_tile(pos).contains_opponent(type):
+		var attack_position = boardScene.board_position(pos)
+		var damage : int = round(rand_range(min_damage, max_damage))
+		var killed = boardScene.get_tile(pos).contains.take_damage(damage)
+		if killed:
+			.move_to(pos)
+		else:
+			.attack(boardScene.board_position(current_tile), attack_position)
+
+
+	else:
+		.move_no_turn(pos)
+		for dir in directions:
+			var attack_pos = pos + dir
+			if boardScene.is_inbounds(attack_pos):
+				if boardScene.get_tile(attack_pos).contains_opponent(type):
+					var damage : int = round(rand_range(min_damage, max_damage))
+					var killed = boardScene.get_tile(attack_pos).contains.take_damage(damage)
+		
+		if type == "Player":
+			yield(self, "finished_movement")
+			GameManager.next_turn()
