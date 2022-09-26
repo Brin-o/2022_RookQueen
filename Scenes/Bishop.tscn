@@ -11,6 +11,7 @@
 [node name="Bishop" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
+hp = 6
 min_damage = 2
 
 [node name="SpritePivot" type="Node2D" parent="."]

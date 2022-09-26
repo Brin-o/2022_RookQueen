@@ -124,7 +124,7 @@ func change_level(_num):
 	
 	board.generate_enemies()
 
-	camera.target_z = rand_range(0.9,1.2)
+	camera.target_z = rand_range(0.85,1.15)
 	camera.target_rot = rand_range(-3,3)
 	#board.set_visible_enemies(false)
 	

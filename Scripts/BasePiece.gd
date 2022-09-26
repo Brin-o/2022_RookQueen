@@ -47,8 +47,8 @@ func _physics_process(delta):
 	anim_selection()
 	anim_movement()
 	if type == "Enemy":
-		$DmgDisplay.text = str(min_damage) + "-" +str(max_damage) + "DMG"
-		$DmgDisplay/Shadow.text = str(min_damage) + "-" +str(max_damage) + "DMG"
+		$DmgDisplay.text = str(min_damage) + "-" +str(max_damage) + " DMG"
+		$DmgDisplay/Shadow.text = str(min_damage) + "-" +str(max_damage) + " DMG"
 	else:
 		$DmgDisplay.text = ""
 		$DmgDisplay/Shadow.text = ""
