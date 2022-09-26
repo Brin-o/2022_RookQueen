@@ -9,5 +9,5 @@ func hp_pop(node : Node2D):
 	position.y = -16
 	$Label.text = "+" + str(1) + " DMG" 
 	tween.interpolate_property(self, "position",null, position + Vector2(0, -8), 1)
-	tween.interpolate_property(self, "modulate", null, Color(0,0,0,0), 1)
+	tween.interpolate_property(self, "modulate", null, Color(0,0,0,0), 3)
 	tween.start()
