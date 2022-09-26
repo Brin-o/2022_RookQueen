@@ -1,6 +1,7 @@
 extends Node2D
 
-
+func _ready():
+	GameManager.ui = self
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,4 +18,9 @@ func _process(delta):
 
 	if is_instance_valid(GameManager.board):
 		$LVL/Label.text = "LVL: " + str(GameManager.level.num)
+
+		if GameManager.level.num == 1:
+			visible = false
+		else:
+			visible = true
 	pass

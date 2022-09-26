@@ -23,7 +23,7 @@ todo:
 - [ ] camera shake when taking dmg
 - [ ] zoom-in punch when hitting an enemy + slight rotation
 - [ ] death screen
-- [ ] dmg popups when attacking
+- [x] dmg popups when attacking
 - [ ] next piece is not visible
 - [ ] if an enemy is able to attack it should attack
-- [ ] falling animtion
+- [x] falling animtion

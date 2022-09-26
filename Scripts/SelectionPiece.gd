@@ -26,6 +26,7 @@ func _process(delta):
 		rect_position.y = lerp(rect_position.y, 0, delta*14)
 
 	if Input.is_action_just_pressed("mouseL") and hovered:
+		print("test")
 		GameManager.upgrade_piece(map_piece, bonus_hp)
 
 	pass
