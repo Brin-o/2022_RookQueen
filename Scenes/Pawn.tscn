@@ -9,6 +9,7 @@
 [node name="Pawn" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
+hp = 2
 min_damage = 2
 max_damage = 3
 

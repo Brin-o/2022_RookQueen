@@ -120,11 +120,7 @@ func change_level(_num):
 	
 	board.generate_enemies()
 
-	if player == null:
-		find_player()
-		player_hp = player.hp
-
-	camera.target_z = rand_range(0.8,1.2)
+	camera.target_z = rand_range(0.9,1.2)
 	camera.target_rot = rand_range(-3,3)
 	#board.set_visible_enemies(false)
 	

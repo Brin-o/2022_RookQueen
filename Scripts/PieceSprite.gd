@@ -21,3 +21,7 @@ func _physics_process(delta):
 
 func take_dmg():
 	x_scale = 2
+
+func deal_dmg():
+	print("bishop dmg animation")
+	x_scale = 3

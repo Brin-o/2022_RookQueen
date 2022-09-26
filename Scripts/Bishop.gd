@@ -57,9 +57,9 @@ func move_to(var pos : Vector2):
 				if boardScene.get_tile(attack_pos).contains_opponent(type):
 					var damage : int = round(rand_range(min_damage, max_damage))
 					var killed = boardScene.get_tile(attack_pos).contains.take_damage(damage)
-					print("Checking killed")
-					#$SpritePivot.x_scale = 2
-					#yield(get_tree().create_timer(0.5), "timeout")
+					yield(self, "finished_internal_movement")
+					$SpritePivot.deal_dmg()
+					yield(get_tree().create_timer(0.5), "timeout")
 					attacking = false
 		emit_signal("finished_movement")			
 		attacking = false

@@ -11,7 +11,7 @@ margin_bottom = 40.0
 
 [node name="Horse" parent="." instance=ExtResource( 5 )]
 p_name = "HORSE"
-description = "HP: +4
+description = "HP: +2
 MOVE: in an L shape
 ATK: 3-6 DMG on landing position.
 Killing an enemy grants a BONUS turn."
@@ -22,10 +22,11 @@ margin_left = 21.0
 margin_right = 38.0
 texture = ExtResource( 3 )
 p_name = "BISHOP"
-description = "HP: +4
+description = "HP: +3
 MOVE: Diagonally, any amount
 ATK: 2-4 DMG on each adjecent tile after MOVE"
 map_piece = "b"
+bonus_hp = 3
 
 [node name="Rook" parent="." instance=ExtResource( 5 )]
 margin_left = 42.0
@@ -33,3 +34,4 @@ margin_right = 59.0
 texture = ExtResource( 1 )
 p_name = "ROOK"
 map_piece = "r"
+bonus_hp = 4
