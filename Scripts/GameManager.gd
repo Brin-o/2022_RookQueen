@@ -145,3 +145,10 @@ func hide_all_tiles():
 func upgrade_piece(_piece : String, bouns_hp : int):
 	next_player_piece = _piece
 	player_hp+=bouns_hp
+
+
+func lose():
+	var z = camera.zoom.x * rand_range(0.6,0.8)
+	camera.zoom = Vector2.ONE*z
+	camera.target_rot = rand_range(-5,5)
+	yield(get_tree().create_timer(0.3), "timeout")

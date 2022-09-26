@@ -7,7 +7,7 @@
 [ext_resource path="res://Sprites/ui_atk_backdrop.png" type="Texture" id=5]
 [ext_resource path="res://UI.gd" type="Script" id=6]
 [ext_resource path="res://Resaources/AwkwardTall.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://Scripts/Camera.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Partial/Camera2D.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/cursor.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/Cursor.gd" type="Script" id=12]
 [ext_resource path="res://Sprites/ui_health_backdrop.png" type="Texture" id=14]
@@ -57,11 +57,7 @@ palettes = {
 
 [node name="Tween" type="Tween" parent="ShaderL1/ColorManager"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 108, 108 )
-rotating = true
-current = true
-script = ExtResource( 10 )
+[node name="Camera2D" parent="." instance=ExtResource( 8 )]
 
 [node name="UI" type="Node2D" parent="."]
 script = ExtResource( 6 )
@@ -123,20 +119,20 @@ margin_top = 80.0
 margin_right = 104.0
 margin_bottom = 80.0
 
-[node name="Curosor" type="Sprite" parent="UI"]
+[node name="Level1" parent="." instance=ExtResource( 1 )]
+
+[node name="Curosor" type="Sprite" parent="."]
 z_index = 100
 script = ExtResource( 12 )
 
-[node name="Shadow" type="Sprite" parent="UI/Curosor"]
+[node name="Shadow" type="Sprite" parent="Curosor"]
 self_modulate = Color( 0, 0, 0, 1 )
 position = Vector2( -0.5, 4.5 )
 texture = ExtResource( 11 )
 
-[node name="CursorSprite" type="Sprite" parent="UI/Curosor"]
+[node name="CursorSprite" type="Sprite" parent="Curosor"]
 self_modulate = Color( 0.75, 0.75, 0.75, 1 )
 position = Vector2( 0.5, 3.5 )
 texture = ExtResource( 11 )
-
-[node name="Level1" parent="." instance=ExtResource( 1 )]
 
 [connection signal="selected_piece" from="UI/Selection" to="UI/Selection" method="_on_Selection_selected_piece"]
