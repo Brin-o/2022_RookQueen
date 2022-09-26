@@ -50,6 +50,7 @@ func move_to(var pos : Vector2):
 	else: #AOE
 		attacking = true
 		.move_no_turn(pos)
+		yield(self, "finished_internal_movement")
 		for dir in directions:
 			var attack_pos = pos + dir
 			if boardScene.is_inbounds(attack_pos):
@@ -60,8 +61,8 @@ func move_to(var pos : Vector2):
 					$SpritePivot.deal_dmg()
 					yield(get_tree().create_timer(0.5), "timeout")
 					attacking = false
-					emit_signal("finished_movement")
-		
+		emit_signal("finished_movement")			
+		attacking = false
 		if type == "Player":
 			#yield(self, "finished_movement")
 			GameManager.next_turn()
