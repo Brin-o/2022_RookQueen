@@ -53,7 +53,7 @@ func generate_board_no_enemies():
 		for tile in line:
 			var new_tile = tile_scene.instance()
 
-			if GameManager.level == null or GameManager.level.num == 0:
+			if GameManager.level == null or GameManager.level.num == 1:
 				new_tile.position = Vector2(column * tile_size + offset + lvl_1_offset,row * tile_size + offset)
 			else:
 				new_tile.position = Vector2(column * tile_size + offset,row * tile_size + offset)
@@ -186,6 +186,7 @@ func promote(piece):
 	var possibilities = ["H", "B", "R"]
 	var new_type = possibilities[randi() % possibilities.size()]
 	spawn_piece(new_type, tile)
+
 
 func get_closest_tiles_to_player(tiles):
 	var player_tile = GameManager.player.current_tile
