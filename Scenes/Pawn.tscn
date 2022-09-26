@@ -9,7 +9,6 @@
 [node name="Pawn" type="Node2D"]
 z_index = 1
 script = ExtResource( 2 )
-hp = 2
 min_damage = 2
 max_damage = 3
 
@@ -26,5 +25,7 @@ self_modulate = Color( 0.38, 0.38, 0.38, 1 )
 texture = ExtResource( 3 )
 
 [node name="UnitHP" parent="." instance=ExtResource( 4 )]
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="finished_movement" from="." to="." method="_on_BasePiece_finished_movement"]

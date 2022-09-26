@@ -26,4 +26,6 @@ texture = ExtResource( 5 )
 [node name="UnitHP" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -2 )
 
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="finished_movement" from="." to="." method="_on_BasePiece_finished_movement"]

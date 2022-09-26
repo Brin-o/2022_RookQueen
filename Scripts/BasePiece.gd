@@ -94,8 +94,30 @@ func push(from : BasePiece, direction : Vector2):
 	#print("Pushing ",self, " from ", current_tile, " to ", pushed_to)
 	being_pushed = true
 	
-	if not boardScene.is_inbounds(pushed_to) or boardScene.get_tile(pushed_to).type == "C":
-		yield(get_tree().create_timer(0.01), "timeout")
+	if not boardScene.is_inbounds(pushed_to):
+		being_pushed_internal = true
+		anim_start_movement(boardScene.board_position(current_tile), boardScene.get_off_edge_pos(pushed_to))
+		yield(self, "finished_internal_push")
+		$Tween.interpolate_property(self, "scale", null, Vector2.ZERO, 0.4)
+		$Tween.interpolate_property(self, "rotation_degrees", null, 400, 0.4)
+		$Tween.start()
+		yield($Tween, "tween_all_completed")
+		#yield(get_tree().create_timer(0.01), "timeout")
+		emit_signal("finished_push")
+		boardScene.remove_from_enemies(self)
+		queue_free()
+		being_pushed = false
+		return false
+	
+	if boardScene.get_tile(pushed_to).type == "C":
+		being_pushed_internal = true
+		anim_start_movement(boardScene.board_position(current_tile), boardScene.board_position(pushed_to))
+		yield(self, "finished_internal_push")
+		$Tween.interpolate_property(self, "scale", null, Vector2.ZERO, 0.4)
+		$Tween.interpolate_property(self, "rotation_degrees", null, 400, 0.4)
+		$Tween.start()
+		yield($Tween, "tween_all_completed")
+		#yield(get_tree().create_timer(0.01), "timeout")
 		emit_signal("finished_push")
 		boardScene.remove_from_enemies(self)
 		queue_free()
