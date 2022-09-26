@@ -5,6 +5,9 @@ class_name Board
 var board : Array
 var offset
 var res = 216
+
+var show_enemies : bool = false
+
 export (PackedScene) var tile_scene
 
 export(PackedScene) var pawn
@@ -23,7 +26,7 @@ func _ready():
 	generate_board()
 	read_file()
 	GameManager.board = self
-	
+	set_visible_enemies(show_enemies)
 
 func read_file():
 	var file = File.new()
@@ -175,3 +178,8 @@ func get_closest_tiles_to_player(tiles):
 			closest.append(tile)
 			
 	return closest
+
+func set_visible_enemies(val : bool):
+	show_enemies = val
+	for enemy in enemies:
+		enemy.visible = val
