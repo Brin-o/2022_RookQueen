@@ -21,6 +21,24 @@ func can_move_to():
 				break
 			next_tile += dir
 
+	if type == "Enemy":
+		var lower_x = tiles[0]
+		var higher_x = tiles[0]
+		var lower_y = tiles[0]
+		var higher_y = tiles[0]
+
+		for tile in tiles:
+			if tile.x <= lower_x.x:
+				lower_x = tile
+			if tile.y <= lower_y.y:
+				lower_y = tile
+			if tile.x >= higher_x.x:
+				higher_x = tile
+			if tile.y >= higher_y.y:
+				higher_y = tile
+		
+		return [lower_x, higher_x, lower_y, higher_y]
+
 	return tiles
 	
 func move_to(var pos : Vector2):
