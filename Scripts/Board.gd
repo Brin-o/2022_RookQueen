@@ -15,7 +15,7 @@ export(PackedScene) var rook
 export(PackedScene) var king
 
 
-var enemies_type = ["P", "p", "B", "b", "H", "h", "Q", "q", "R", "r", "K", "k"]
+var enemies_type = ["P", "p", "B", "b", "H", "h", "Q", "q", "R", "r", "K", "k", "@"]
 var enemies : Array = []
 
 # Called when the node enters the scene tree for the first time.
@@ -94,6 +94,9 @@ func is_steppable(new_pos: Vector2):
 
 func spawn_piece(tile : String, pos : Vector2):
 	var piece = null
+
+	if tile == "@":
+		tile = GameManager.next_player_piece
 	
 	match(tile):
 		"P","p":
