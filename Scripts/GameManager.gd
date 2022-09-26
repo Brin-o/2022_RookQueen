@@ -164,6 +164,7 @@ func hide_all_tiles():
 
 
 func upgrade_piece(_piece : String, bouns_hp : int):
+	print("SELECTED: ", _piece)
 	next_player_piece = _piece
 	player_hp+=bouns_hp
 	emit_signal("selected_new_piece")
