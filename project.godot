@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/King.gd"
 }, {
-"base": "Node2D",
+"base": "YSort",
 "class": "LevelInfo",
 "language": "GDScript",
 "path": "res://Scripts/LevelInfo.gd"

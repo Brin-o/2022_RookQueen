@@ -3,9 +3,8 @@
 [ext_resource path="res://Scenes/Board.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/LevelInfo.gd" type="Script" id=2]
 
-[node name="Level10" type="Node2D" groups=["level"]]
+[node name="Level10" type="YSort" groups=["level"]]
 script = ExtResource( 2 )
 num = 10
 
 [node name="Board" parent="." groups=["level"] instance=ExtResource( 1 )]
-dimension = 9
