@@ -102,8 +102,6 @@ func change_level(_num):
 	level.call_deferred("queue_free")
 	main_scene.add_child(levels[_num-1].instance())
 	board.generate_board_no_enemies()
-	main_scene.get_node("UI/Selection").visible = false
-	yield(get_tree().create_timer(3), "timeout")
 	main_scene.get_node("UI/Selection").visible = true
 	yield(self, "selected_new_piece")
 	main_scene.get_node("UI/Selection").visible = false

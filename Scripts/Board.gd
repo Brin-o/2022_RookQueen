@@ -3,6 +3,7 @@ extends Node
 class_name Board
 
 var board : Array
+export var lvl_1_offset : int = 50
 var offset
 var res = 216
 var tile_size = 0
@@ -46,11 +47,18 @@ func generate_board_no_enemies():
 	tile_size = tile_instance.get_node("Sprite/FloorSprite").texture.get_size().x * tile_instance.get_node("Sprite/FloorSprite").scale.x + 4
 	offset = res/2 - ((len(lines)-1) * (tile_size/2))
 	
+	
 	for line in lines:
 		board.append([])
 		for tile in line:
 			var new_tile = tile_scene.instance()
-			new_tile.position = Vector2(column * tile_size + offset,row * tile_size + offset)
+
+			if GameManager.level == null or GameManager.level.num == 0:
+				new_tile.position = Vector2(column * tile_size + offset + lvl_1_offset,row * tile_size + offset)
+			else:
+				new_tile.position = Vector2(column * tile_size + offset,row * tile_size + offset)
+
+			#new_tile.position = Vector2(column * tile_size + offset,row * tile_size + offset)
 			new_tile.pos = Vector2(row, column)
 			new_tile.color = "White" if(row%2==0 and column%2!=0 or row%2!=0 and column%2==0) else "Black"
 			if tile in enemies_type:
