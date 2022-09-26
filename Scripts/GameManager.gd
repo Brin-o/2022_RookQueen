@@ -11,6 +11,7 @@ var level : LevelInfo
 var camera
 var ui
 var next_player_piece = "p"
+var skip_piece_pick_in_levels = [0,1,2,3]
 
 export var one_at_a_time : bool = true
 var next_piece_idx : int = 0
@@ -103,9 +104,11 @@ func change_level(_num):
 	level.call_deferred("queue_free")
 	main_scene.add_child(levels[_num-1].instance())
 	board.generate_board_no_enemies()
-	main_scene.get_node("UI/Selection").visible = true
-	yield(self, "selected_new_piece")
-	main_scene.get_node("UI/Selection").visible = false
+	if not _num in skip_piece_pick_in_levels:
+		print(level.num)
+		main_scene.get_node("UI/Selection").visible = true
+		yield(self, "selected_new_piece")
+		main_scene.get_node("UI/Selection").visible = false
 	board.generate_enemies()
 
 	camera.target_z = rand_range(0.8,1.2)
