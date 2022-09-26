@@ -142,4 +142,19 @@ func spike_setcolor():
 	pass
 
 func _on_KinematicBody2D_mouse_entered():
-	pass # Replace with function body.
+	if $Selection/Attack.visible:
+		$Selection/AttackHover.visible = true;
+		$Selection/Attack.scale = Vector2.ONE*1.25
+	if $Selection/Move.visible:
+		$Selection/MoveHover.visible = true;
+		$Selection/Move.scale = Vector2.ONE*1.25
+
+	
+
+
+func _on_KinematicBody2D_mouse_exited():
+	$Selection/Move.scale = Vector2.ONE
+	$Selection/Attack.scale = Vector2.ONE
+	$Selection/MoveHover.visible = false;
+	$Selection/AttackHover.visible = false;
+

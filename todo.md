@@ -2,13 +2,13 @@ todo:
 - [x] spike tiles
 - [x] level swapping DONEish
 - [ ] piece swapping between level
-- [ ] bishop, make it so a regular attack is also possible
+- [x] bishop, make it so a regular attack is also possible
+- [ ] bishop display tiles that will be attacked on move
 - [ ] display hovered tiles
 - [x] bishop should attack in a + pattern instead of X
 - [x] pawn upgrade to random piece after reaching the end
 - [x] timer between player move and enemy move
 - [x] in base piece call set_active_piece(true) if this is the next piece that will perform a turn
-- [ ] solution for horse/horse? start spawning spikes on the outer edges of the map basically doing a bomber man style thing?
 - [x] implement queen
 - [x] implement king
 - [ ] make rook move all the way (not done??)
@@ -24,3 +24,6 @@ todo:
 - [ ] zoom-in punch when hitting an enemy + slight rotation
 - [ ] death screen
 - [ ] dmg popups when attacking
+- [ ] next piece is not visible
+- [ ] if an enemy is able to attack it should attack
+- [ ] falling animtion

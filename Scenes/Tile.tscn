@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/BaseTile.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/KeySprite.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/Partial/SpikeAnimation.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Sprites/Tiles/tile_f.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/selection_border.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/selection_hover.png" type="Texture" id=11]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -156,10 +157,20 @@ visible = false
 self_modulate = Color( 0.75, 0.75, 0.75, 1 )
 texture = ExtResource( 10 )
 
+[node name="MoveHover" type="Sprite" parent="Selection"]
+visible = false
+self_modulate = Color( 0.75, 0.75, 0.75, 1 )
+texture = ExtResource( 11 )
+
 [node name="Attack" type="Sprite" parent="Selection"]
 visible = false
 self_modulate = Color( 0.62, 0.62, 0.62, 1 )
 texture = ExtResource( 10 )
+
+[node name="AttackHover" type="Sprite" parent="Selection"]
+visible = false
+self_modulate = Color( 0.62, 0.62, 0.62, 1 )
+texture = ExtResource( 11 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 input_pickable = true
@@ -170,6 +181,7 @@ shape = SubResource( 1 )
 
 [connection signal="input_event" from="KinematicBody2D" to="." method="_on_KinematicBody2D_input_event"]
 [connection signal="mouse_entered" from="KinematicBody2D" to="." method="_on_KinematicBody2D_mouse_entered"]
+[connection signal="mouse_exited" from="KinematicBody2D" to="." method="_on_KinematicBody2D_mouse_exited"]
 
 [editable path="Sprite/SpikesSprite/Spike2"]
 [editable path="Sprite/SpikesSprite/Spike1"]
