@@ -11,6 +11,9 @@ var base_max_dmg = max_damage
 export var counter_increase : int = 1
 var counter : int = 0
 
+var buff = load("res://Scenes/Partial/BuffPopup.tscn")
+
+
 func can_move_to():
 	var tiles : Array = []
 
@@ -40,7 +43,6 @@ func can_move_to():
 	return tiles
 
 func move_to(var pos : Vector2):
-	counter+=1
 	if boardScene.get_tile(pos).contains_opponent(type):
 		var attack_position = boardScene.board_position(pos)
 		var damage : int = round(rand_range(min_damage, max_damage))
@@ -52,5 +54,10 @@ func move_to(var pos : Vector2):
 			counter+=1
 	else:
 		.move_to(pos)
+	counter+=1
 	min_damage = base_min_dmg + counter*counter_increase
 	max_damage = base_max_dmg + counter*counter_increase
+	var b = buff.instance()
+	add_child(b)
+	b.hp_pop(self)
+	
