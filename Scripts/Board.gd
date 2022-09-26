@@ -5,8 +5,9 @@ class_name Board
 var board : Array
 var offset
 var res = 216
+var tile_size = 0
 
-var show_enemies : bool = false
+var show_enemies : bool = true
 
 export (PackedScene) var tile_scene
 
@@ -42,7 +43,7 @@ func generate_board():
 	board = []
 
 	var tile_instance = tile_scene.instance()
-	var tile_size = tile_instance.get_node("Sprite/FloorSprite").texture.get_size().x * tile_instance.get_node("Sprite/FloorSprite").scale.x + 4
+	tile_size = tile_instance.get_node("Sprite/FloorSprite").texture.get_size().x * tile_instance.get_node("Sprite/FloorSprite").scale.x + 4
 	offset = res/2 - ((len(lines)-1) * (tile_size/2))
 	
 	for line in lines:
@@ -86,6 +87,9 @@ func is_inbounds(new_pos: Vector2):
 		return false
 		
 	return true
+
+func get_off_edge_pos(var off_edge_pos):
+	return Vector2(off_edge_pos.y * tile_size + offset,off_edge_pos.x * tile_size + offset)
 
 func is_steppable(new_pos: Vector2):
 	var inbounds = is_inbounds(new_pos)
