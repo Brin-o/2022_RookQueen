@@ -153,12 +153,19 @@ func _on_KinematicBody2D_mouse_entered():
 		if GameManager.selected_piece != null and GameManager.selected_piece.get_type() == "Bishop":
 			GameManager.show_bishop_attack_tiles(pos)
 
+	if contains:
+		contains.get_node("DmgDisplay").visible = true
+		
+
 
 func _on_KinematicBody2D_mouse_exited():
 	$Selection/Move.scale = Vector2.ONE
 	$Selection/Attack.scale = Vector2.ONE
 	$Selection/MoveHover.visible = false;
 	$Selection/AttackHover.visible = false;
+
+	if contains:
+		contains.get_node("DmgDisplay").visible = false
 
 	if GameManager.selected_piece != null and GameManager.selected_piece.get_type() == "Bishop":
 		GameManager.hide_bishop_attack_tiles(pos)

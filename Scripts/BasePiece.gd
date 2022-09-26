@@ -31,6 +31,7 @@ func get_type():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$DmgDisplay.visible = false
 	boardScene = get_parent().get_node("Board")
 	position = boardScene.board_position(current_tile)
 	anim_start_movement(position, position)
@@ -45,6 +46,13 @@ func _ready():
 func _physics_process(delta):
 	anim_selection()
 	anim_movement()
+	if type == "Enemy":
+		$DmgDisplay.text = str(min_damage) + "-" +str(max_damage) + "DMG"
+		$DmgDisplay/Shadow.text = str(min_damage) + "-" +str(max_damage) + "DMG"
+	else:
+		$DmgDisplay.text = ""
+		$DmgDisplay/Shadow.text = ""
+
 
 func can_move_to():
 	assert(false, "Method not implemented!")

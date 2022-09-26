@@ -5,6 +5,13 @@ class_name Rook
 func get_type():
 	return "Rook"
 
+
+func _process(delta):
+	if type == "Enemy":
+		$DmgDisplay.text = "?"
+		$DmgDisplay/Shadow.text = "?"
+
+
 func can_move_to():
 	var tiles : Array = []
 
