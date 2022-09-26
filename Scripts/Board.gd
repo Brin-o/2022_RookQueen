@@ -24,10 +24,10 @@ var enemies : Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	generate_board()
-	read_file()
 	GameManager.board = self
-	set_visible_enemies(show_enemies)
+	if GameManager.level == null or GameManager.level.num == 0:
+		generate_board_no_enemies()
+		generate_enemies()
 
 func read_file():
 	var file = File.new()
@@ -36,7 +36,7 @@ func read_file():
 	return content.split("\n")
 
 
-func generate_board():
+func generate_board_no_enemies():
 	var lines : Array = read_file()
 	var row = 0
 	var column = 0
@@ -55,11 +55,27 @@ func generate_board():
 			new_tile.color = "White" if(row%2==0 and column%2!=0 or row%2!=0 and column%2==0) else "Black"
 			if tile in enemies_type:
 				new_tile.type = "."
-				spawn_piece(tile, new_tile.pos)
+				#spawn_piece(tile, new_tile.pos)
 			else:
 				new_tile.type = tile
 			add_child(new_tile)
 			board[row].append(new_tile)
+			column += 1
+		row += 1
+		column = 0
+	if len(enemies)>0:
+		enemies[0].set_active_piece(true)
+
+func generate_enemies():
+	var lines : Array = read_file()
+	var row = 0
+	var column = 0
+	
+	for line in lines:
+		for tile in line:
+			var t = board[row][column]
+			if tile in enemies_type:
+				spawn_piece(tile, t.pos)
 			column += 1
 		row += 1
 		column = 0

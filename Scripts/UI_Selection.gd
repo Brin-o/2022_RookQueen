@@ -1,7 +1,7 @@
 extends Control
 class_name UI_Selection
 
-
+signal selected_piece
 
 const DEFAULT_N="PROMOTION"
 const DEFAULT_D="Select a piece to upgrade your character to."
@@ -27,3 +27,6 @@ func default_txt():
 
 func _on_Button_pressed():
 	pass # Replace with function body.
+
+func _on_Selection_selected_piece(piece):
+	GameManager.next_player_piece = piece

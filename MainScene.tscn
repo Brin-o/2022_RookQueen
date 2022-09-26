@@ -138,3 +138,5 @@ position = Vector2( 0.5, 3.5 )
 texture = ExtResource( 11 )
 
 [node name="Level1" parent="." instance=ExtResource( 1 )]
+
+[connection signal="selected_piece" from="UI/Selection" to="UI/Selection" method="_on_Selection_selected_piece"]

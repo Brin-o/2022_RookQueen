@@ -6,7 +6,7 @@ var board : Board
 var recolor : ColorManager
 var player
 var level : LevelInfo
-var camera : CameraCtrl
+var camera
 var next_player_piece = "p"
 
 export var one_at_a_time : bool = true
@@ -97,9 +97,15 @@ func show_tiles(should_show):
 
 func change_level(_num):
 	player_hp = player.hp
-	print("going to level", _num)
 	level.call_deferred("queue_free")
 	main_scene.add_child(levels[_num-1].instance())
+	board.generate_board_no_enemies()
+	main_scene.get_node("UI/Selection").visible = false
+	yield(get_tree().create_timer(3), "timeout")
+	main_scene.get_node("UI/Selection").visible = true
+	yield(main_scene.get_node("UI/Selection"), "selected_piece")
+	print("Exited yield GM")
+	#board.set_visible_enemies(false)
 	
 func show_next_attack():
 	board.enemies[next_piece_idx].set_active_piece(true)

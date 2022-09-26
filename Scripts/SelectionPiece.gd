@@ -16,8 +16,6 @@ func _ready():
 	pass # Replace with function body.
 
 
-
-
 func _process(delta):
 	if(hovered):
 		rect_position.y = lerp(rect_position.y, -10, delta*10)
@@ -38,3 +36,6 @@ func _on_Piece_mouse_entered():
 func _on_Piece_mouse_exited():
 	hovered = false
 	ui_selection.default_txt()
+
+func click():
+	ui_selection._on_Selection_selected_piece(map_piece)
