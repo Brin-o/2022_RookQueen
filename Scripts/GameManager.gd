@@ -1,5 +1,7 @@
 extends YSort
 
+signal selected_new_piece
+
 var selected_piece
 var turn = "Player"
 var board : Board
@@ -103,8 +105,9 @@ func change_level(_num):
 	main_scene.get_node("UI/Selection").visible = false
 	yield(get_tree().create_timer(3), "timeout")
 	main_scene.get_node("UI/Selection").visible = true
-	yield(main_scene.get_node("UI/Selection"), "selected_piece")
-	print("Exited yield GM")
+	yield(self, "selected_new_piece")
+	main_scene.get_node("UI/Selection").visible = false
+	board.generate_enemies()
 	#board.set_visible_enemies(false)
 	
 func show_next_attack():
@@ -145,10 +148,11 @@ func hide_all_tiles():
 func upgrade_piece(_piece : String, bouns_hp : int):
 	next_player_piece = _piece
 	player_hp+=bouns_hp
+	emit_signal("selected_new_piece")
+
+
 
 
 func lose():
-	var z = camera.zoom.x * rand_range(0.6,0.8)
-	camera.zoom = Vector2.ONE*z
-	camera.target_rot = rand_range(-5,5)
+
 	yield(get_tree().create_timer(0.3), "timeout")

@@ -36,6 +36,7 @@ func can_move_to():
 func move_to(var pos : Vector2):
 	var directions = [Vector2(0,-1), Vector2(0,1), Vector2(1,0), Vector2(-1,0)]
 
+	#NOT AOE
 	if boardScene.get_tile(pos).contains_opponent(type):
 		var attack_position = boardScene.board_position(pos)
 		var damage : int = round(rand_range(min_damage, max_damage))
@@ -46,7 +47,8 @@ func move_to(var pos : Vector2):
 			.attack(boardScene.board_position(current_tile), attack_position)
 
 
-	else:
+	else: #AOE
+		attacking = true
 		.move_no_turn(pos)
 		for dir in directions:
 			var attack_pos = pos + dir
@@ -54,7 +56,12 @@ func move_to(var pos : Vector2):
 				if boardScene.get_tile(attack_pos).contains_opponent(type):
 					var damage : int = round(rand_range(min_damage, max_damage))
 					var killed = boardScene.get_tile(attack_pos).contains.take_damage(damage)
+					yield(self, "finished_internal_movement")
+					$SpritePivot.x_scale = 2
+					yield(get_tree().create_timer(0.5), "timeout")
+					attacking = false
+					emit_signal("finished_movement")
 		
 		if type == "Player":
-			yield(self, "finished_movement")
+			#yield(self, "finished_movement")
 			GameManager.next_turn()
