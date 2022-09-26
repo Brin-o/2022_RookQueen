@@ -75,6 +75,10 @@ func die():
 	boardScene.remove_from_enemies(self)
 	boardScene.get_tile(current_tile).contains = null
 	queue_free()
+	
+	if type == "Player":
+		GameManager.player = null
+		GameManager.lose_animation()
 
 func do_random_move():
 	var possible_moves = can_move_to()

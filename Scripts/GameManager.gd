@@ -1,6 +1,7 @@
 extends YSort
 
 signal selected_new_piece
+signal mouse_click
 
 var selected_piece
 var turn = "Player"
@@ -12,6 +13,7 @@ var camera
 var ui
 var next_player_piece = "p"
 var skip_piece_pick_in_levels = [0,1,2,3]
+var lost = false
 
 export var one_at_a_time : bool = true
 var next_piece_idx : int = 0
@@ -45,6 +47,10 @@ func _process(delta):
 		change_level(level.num+1)
 		pass
 	pass
+
+func _input(event):
+	if(event is InputEventMouseButton and event.is_pressed() and not event.is_echo()):
+		emit_signal("mouse_click")
 
 func set_selected_piece(piece):
 	selected_piece = piece
@@ -100,7 +106,9 @@ func show_tiles(should_show):
 		board.set_selectable_outline(tile_pos, should_show)
 
 func change_level(_num):
-	player_hp = player.hp
+	yield(get_tree().create_timer(0.1), "timeout")
+	if player != null and player.hp != null:
+		player_hp = player.hp
 	level.call_deferred("queue_free")
 	main_scene.add_child(levels[_num-1].instance())
 	board.generate_board_no_enemies()
@@ -109,6 +117,7 @@ func change_level(_num):
 		main_scene.get_node("UI/Selection").visible = true
 		yield(self, "selected_new_piece")
 		main_scene.get_node("UI/Selection").visible = false
+	
 	board.generate_enemies()
 
 	camera.target_z = rand_range(0.9,1.2)
@@ -155,7 +164,11 @@ func upgrade_piece(_piece : String, bouns_hp : int):
 	player_hp+=bouns_hp
 	emit_signal("selected_new_piece")
 
-
+func find_player():
+	for tiles in board.board:
+		for tile in tiles:
+			if tile.contains_player():
+				player = tile.contains
 
 var lose_msg = ["""you have 
 failed""","""your attempts
@@ -168,3 +181,11 @@ func lose_animation():
 	var t = Util.choose(lose_msg)
 	for l in ui.get_node("LoseScreen").get_children():
 		l.text = t
+	yield(self, "mouse_click")
+	restart()
+	for l in ui.get_node("LoseScreen").get_children():
+		l.text = ""
+
+func restart():
+	next_player_piece = "p"
+	change_level(1)	
