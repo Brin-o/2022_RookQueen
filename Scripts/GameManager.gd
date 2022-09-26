@@ -32,7 +32,7 @@ var levels : Array = [
 	preload("res://Levels/Level10.tscn"),
 	preload("res://Levels/Level11.tscn")] 
 
-var player_hp = 2
+var player_hp = 10
 
 
 # Called when the node enters the scene tree for the first time.
