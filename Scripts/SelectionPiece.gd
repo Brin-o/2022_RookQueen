@@ -17,16 +17,18 @@ func _ready():
 
 
 func _process(delta):
-	if GameManager.next_player_piece == map_piece:
-		visible = false
+	visible = GameManager.next_player_piece != map_piece
+	
 
-	if(hovered):
+	if hovered:
 		rect_position.y = lerp(rect_position.y, -10, delta*10)
 	else:
 		rect_position.y = lerp(rect_position.y, 0, delta*14)
 
 	if Input.is_action_just_pressed("mouseL") and hovered:
+		hovered = false
 		GameManager.upgrade_piece(map_piece, bonus_hp)
+		yield(GameManager, "selected_new_piece")
 
 	pass
 
