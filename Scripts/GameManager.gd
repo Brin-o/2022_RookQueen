@@ -6,6 +6,7 @@ var board : Board
 var recolor : ColorManager
 var player
 var level : LevelInfo
+var camera : CameraCtrl
 var next_player_piece = "p"
 
 export var one_at_a_time : bool = true
@@ -99,7 +100,6 @@ func change_level(_num):
 	print("going to level", _num)
 	level.call_deferred("queue_free")
 	main_scene.add_child(levels[_num-1].instance())
-	player_hp += 2
 	
 func show_next_attack():
 	board.enemies[next_piece_idx].set_active_piece(true)
@@ -136,3 +136,6 @@ func hide_all_tiles():
 				tile.clean_tile()
 
 
+func upgrade_piece(_piece : String, bouns_hp : int):
+	next_player_piece = _piece
+	player_hp+=bouns_hp

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/SelectionPiece.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Pieces/horse.png" type="Texture" id=2]
+
+[node name="Piece" type="TextureRect"]
+margin_right = 17.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+p_name = "The Piece"
+description = "HP: +4
+ATK: 1 DMG for each tile moved.
+Attacking pushes the enemy."
+
+[connection signal="mouse_entered" from="." to="." method="_on_Piece_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Piece_mouse_exited"]

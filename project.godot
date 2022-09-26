@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Board.gd"
 }, {
+"base": "Camera2D",
+"class": "CameraCtrl",
+"language": "GDScript",
+"path": "res://Scripts/Camera.gd"
+}, {
 "base": "ColorRect",
 "class": "ColorManager",
 "language": "GDScript",
@@ -58,18 +63,25 @@ _global_script_classes=[ {
 "class": "Rook",
 "language": "GDScript",
 "path": "res://Scripts/Rook.gd"
+}, {
+"base": "Control",
+"class": "UI_Selection",
+"language": "GDScript",
+"path": "res://Scripts/UI_Selection.gd"
 } ]
 _global_script_class_icons={
 "BasePiece": "",
 "Bishop": "",
 "Board": "",
+"CameraCtrl": "",
 "ColorManager": "",
 "Horse": "",
 "King": "",
 "LevelInfo": "",
 "Pawn": "",
 "Queen": "",
-"Rook": ""
+"Rook": "",
+"UI_Selection": ""
 }
 
 [application]

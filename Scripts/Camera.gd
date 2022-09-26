@@ -1,16 +1,13 @@
 extends Camera2D
+class_name CameraCtrl
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var target_rot = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	GameManager.camera = self
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	rotation_degrees = lerp(rotation_degrees, target_rot, delta*8)

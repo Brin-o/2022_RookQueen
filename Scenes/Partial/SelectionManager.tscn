@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Pieces/rook.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Pieces/bishop.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Partial/SelectionPiece.tscn" type="PackedScene" id=5]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+margin_left = 8.0
+margin_right = 67.0
+margin_bottom = 40.0
+
+[node name="Horse" parent="." instance=ExtResource( 5 )]
+p_name = "HORSE"
+description = "HP: +4
+MOVE: in an L shape
+ATK: 3-6 DMG on landing position.
+Killing an enemy grants a BONUS turn."
+map_piece = "h"
+
+[node name="Bishop" parent="." instance=ExtResource( 5 )]
+margin_left = 21.0
+margin_right = 38.0
+texture = ExtResource( 3 )
+p_name = "BISHOP"
+description = "HP: +4
+MOVE: Diagonally, any amount
+ATK: 2-4 DMG on each adjecent tile after MOVE"
+map_piece = "b"
+
+[node name="Rook" parent="." instance=ExtResource( 5 )]
+margin_left = 42.0
+margin_right = 59.0
+texture = ExtResource( 1 )
+p_name = "ROOK"
+map_piece = "r"
