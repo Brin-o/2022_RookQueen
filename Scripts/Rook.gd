@@ -56,7 +56,12 @@ func move_to(var pos : Vector2):
 		#position = boardScene.board_position(pos)
 		var enemy = boardScene.get_tile(pos).contains
 		var damage : int = round(rand_range(min_damage, max_damage))
-		var killed = enemy.take_damage(damage)
+		var dist_x = abs(current_tile.x - pos.x)
+		var dist_y = abs(current_tile.y - pos.y)
+		var dist = max(dist_x, dist_y)
+
+		var killed = enemy.take_damage(dist)
+
 		if killed:
 			.move_to(pos)
 		else:

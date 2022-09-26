@@ -140,6 +140,10 @@ func spawn_piece(tile : String, pos : Vector2):
 			piece = queen.instance()
 		"R","r":
 			piece = rook.instance()
+			if GameManager.level.num == 3:
+				piece.min_damage = 1
+				piece.max_damage = 1
+				piece.hp = 4
 		"K","k":
 			piece = king.instance()
 		_:
