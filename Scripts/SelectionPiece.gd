@@ -18,7 +18,9 @@ func _ready():
 
 func _process(delta):
 	visible = GameManager.next_player_piece != map_piece
-	
+	if GameManager.level.num == 4 and map_piece == "h":
+		visible = false
+		hovered = false
 
 	if hovered:
 		rect_position.y = lerp(rect_position.y, -10, delta*10)
