@@ -233,10 +233,10 @@ script = ExtResource( 12 )
 
 [node name="Shadow" type="Sprite" parent="Curosor"]
 self_modulate = Color( 0, 0, 0, 1 )
-position = Vector2( -0.5, 4.5 )
+position = Vector2( 2.5, 2.5 )
 texture = ExtResource( 11 )
 
 [node name="CursorSprite" type="Sprite" parent="Curosor"]
 self_modulate = Color( 0.75, 0.75, 0.75, 1 )
-position = Vector2( 0.5, 3.5 )
+position = Vector2( 3.5, 1.5 )
 texture = ExtResource( 11 )
