@@ -19,6 +19,18 @@ func can_move_to():
     if boardScene.is_inbounds(fwd_right) and boardScene.get_tile(fwd_right).contains_opponent(type):
         tiles.append(fwd_right)
 
+    var enemy_tiles = []
+
+    #Force player to attack
+    if type == "Player":
+        for t in tiles:
+            if boardScene.get_tile(t).contains_opponent(type):
+                enemy_tiles.push_back(t)
+        
+        if len(enemy_tiles) > 0:
+            return enemy_tiles
+
+
     return tiles
 
 func move_to(var pos : Vector2):
