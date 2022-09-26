@@ -15,5 +15,12 @@ todo:
 - [x] make characters attack if they can
 - [x] change level to ysort
 - [ ] the only way to place down a piece should be by putting it in the same place
-- [ ] UI elements
+- [x] UI elements
 - [ ] display enemy HP/atk on hover
+- [ ] pieces should be on Z = 1 when animating
+- [ ] smooth transitions between levels
+– [ ] flavour text before a level
+- [ ] camera shake when taking dmg
+- [ ] zoom-in punch when hitting an enemy + slight rotation
+- [ ] death screen
+- [ ] dmg popups when attacking
